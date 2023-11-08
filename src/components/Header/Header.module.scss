@@ -1,0 +1,366 @@
+@import '../../assets/GeneralDefine.scss';
+
+.header {
+  width: 100%;
+  top: 0;
+  left: 0;
+  position: fixed;
+  padding: 0px 5rem;
+  z-index: 999;
+  background-color: $light;
+
+  .header-container {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    border-bottom: 1px solid $grey;
+
+    .categories {
+      display: flex;
+      gap: 1.5rem;
+    
+      .category {
+        padding: 20px 0px;
+
+        .group-name, a {
+          color: $text-color;
+          display: flex;
+          align-items: center;
+          font-weight: 600;
+          gap: 5px;
+          font-family: 'Montserrat', sans-serif, 400;
+          letter-spacing: 0.02em;
+          font-size: 1rem;
+          cursor: pointer;
+      
+          &:hover {
+            color: $navbar-text-color;
+          }
+    
+          &.special {
+            color: $special-text-color;
+          }
+        }
+
+        &:hover > .sub-menu {
+          display: flex;
+          transition: 1s;
+          animation: bottomShow 0.3s linear;
+        }
+    
+        .sub-menu {
+          z-index: 1;
+          top: 60px;
+          left: 0;
+          background-color: $light;
+          display: none;
+          transition: 1s;
+          position: absolute;
+          width: 100%;
+          padding: 24px;
+          border: 1px solid $grey;
+    
+          .cat-sub-menu {
+            width: 15%;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            margin-right: 50px;
+            a {
+              font-size: 0.87rem;
+              width: 100%;
+            }
+          }
+
+          .list-sub-menu {
+            display: flex;
+            flex-wrap: wrap;
+            
+            .sub-menu-item {
+              height: max-content;
+              width: max-content;
+              margin-right: 50px;
+
+              h3 a {
+                font-size: 14px;
+                font-weight: bold;
+              }
+
+              ul {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+
+                a {
+                  font-size: 14px;
+                  font-weight: 400;
+                  color: $grey-text-color;
+                }
+              }
+
+            }
+          }
+        }
+      }
+    }
+
+    .brand {
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, 0);
+
+      img {
+        width: 13rem;
+        height: 4.1rem;
+      }
+    }
+
+    .control {
+      width: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+
+      @include responsive(1800px) {
+        width: 40%;
+      }
+
+      @include responsive(1600px) {
+        width: 30%;
+      }
+
+      form {
+        display: flex;
+        border: 1px solid $grey;
+        margin-right: 3.0rem;
+        border-radius: 5px;
+        max-width: 360px;
+        width: 100%;
+        
+        button {
+          @include centerContent();
+          background-color: transparent;
+          width: 40px;
+          height: 40px;
+          position: absolute;
+          z-index: 1;
+          border: none!important;
+          color: $text-color;
+        }
+        
+        input {
+          border: none;
+          width: 100%;
+          height: 40px;
+          padding: 0 40px;
+          position: relative;
+          background-color: $light;
+
+          &:focus {
+            outline: none;
+          }
+
+          &::-webkit-input-placeholder {
+            font-size: 0.875rem;
+          }
+        }
+      }
+      
+
+      .actions {
+        display: flex;
+        gap: 1rem;
+
+        .action {
+          font-size: 1.125rem;
+          position: relative;
+
+          a {
+            color: $text-color;
+            
+            .number-cart-items {
+              position: absolute;
+              top: -10px;
+              font-size: 0.75rem;
+              border-radius: 50%;
+              padding: 0 5px;
+              color: $light;   
+              background-color: #000;
+            }
+
+            svg {
+              font-size: 1.5rem;
+            }
+          }
+
+          .slip-cart {
+
+            .slip-cart-header {
+              border-bottom: 1px solid #F7F8F9;
+              margin-bottom: 24px;
+            }
+        
+            .slip-cart-body {
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+              padding: 0;
+              
+              .slip-cart-list {
+                width: 100%;
+                max-height: 70%;
+                overflow-y: auto;
+        
+                .slip-cart-item {
+                  display: flex;
+                  padding: 0 24px 12px 24px;
+                  gap: 12px;
+                  border-bottom: 1px solid #F6F7F8;
+              
+                  img {
+                    width: 64px;
+                    height: 100%;
+                  }
+              
+                  .info {
+                    max-width: 80%;
+                    width: 80%;
+              
+                    & > * , & > * a{
+                      font-weight: 400;
+                  
+                    }
+              
+                    h3{
+                      a {font-size: 1rem;}
+                    }
+                  }
+              
+                  .properties {
+                    display: flex;
+                    gap: 20px;
+              
+                    p {
+                      font-size: 0.875rem;
+                    }
+                  }
+              
+                  .price-group {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+              
+                    .quantity-group {
+                      width: max-content;
+                      position: relative;
+                      display: flex;
+                      justify-content: space-between;
+                      margin-left: 12px;
+              
+                      input {
+                        width: 48px;
+                        height: 24px;
+                        border: 1px solid $light-grey;
+                        padding: 0 20px;
+              
+                        &::placeholder {
+                          font-size: 0.75rem;
+                        }
+                      }
+              
+                      button {
+                        @include centerContent();
+              
+                        height: 24px;
+                        width: 24px;
+                        font-size: 0.625rem;
+                        position: absolute;
+                        background-color: $light;
+                        border: 1px solid $light-grey;
+                        border-radius: 8px 0px;
+              
+                        &.minus {
+                          left: 0;
+                          transform: translate(-50%, 0%)
+                        }
+              
+                        &.plus {
+                          right: 0;
+                          transform: translate(50%, 0%);
+                        }
+              
+                        &:hover {
+                          @include lightHover();
+                        }
+                      }
+                    }
+              
+                    .price {
+                      font-size: 0.875rem;
+                      font-weight: bold;
+                      color: #AC2F33;
+                      margin: 0;
+                    }
+                  }
+                }
+              }
+        
+              .slip-cart-bottom {
+                .slip-cart-total-price {
+                    display: flex;
+                    gap: 10px;
+                    padding: 0 24px;
+                    align-items: center;
+                    justify-content: flex-end;
+                    font-size: 0.875rem;
+                    border-bottom:  1px solid #F7F8F9;
+            
+                    strong {
+                      font-size: 18px;
+                    }
+                  }
+            
+                  .slip-cart-actions {
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    padding: 16px 24px 5px 24px;
+            
+                    a {
+                      font-size: 1rem;
+                      font-weight: bold;
+            
+                      @include bigRectangleButton();
+                      @include lightHover();
+            
+                      
+                      &:nth-child(1) {
+                        margin-bottom: 20px;
+                        background-color: $dark;
+                        color: $light;
+                        @include darkHover()
+                      }
+                    }
+                  }
+              }
+            }
+          }
+
+        }
+      }
+    }
+  }
+}
+
+@keyframes bottomShow {
+  from {
+    opacity: 0;
+    transform: translate(0, 60px);
+  }
+  to {
+    transform: unset;
+    opacity: 1;
+  }
+}

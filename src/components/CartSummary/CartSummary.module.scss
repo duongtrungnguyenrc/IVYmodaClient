@@ -1,0 +1,65 @@
+@import "../../assets/GeneralDefine.scss";
+
+.cart-summary {
+    padding: 22px;
+    background-color: $light-grey;
+
+    .title {
+        font-size: 20px;
+        margin-bottom: 18px;
+    }
+
+    .over-view-items {
+        .over-view-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+    
+            p {
+                color: #57585a;
+            }
+        }
+    }
+
+    .inner-notes {
+        padding: 1rem 0;
+        border-bottom: 1px solid $medium-grey;
+
+        .inner-note {
+            display: flex;
+            gap: 10px;
+            color: #AC2F33;
+            font-size: 0.875rem;
+    
+            svg {
+                font-size: 2rem;
+                fill:  #AC2F33;
+            }
+    
+            &.success {
+                color: #28A745;
+    
+                svg {
+                    font-size: 1.5rem;
+                    fill: #28A745;
+                }
+            }
+        }
+    }
+
+    .purchase {
+        padding: 2rem 0;
+        a {
+            @include centerContent();
+            @include darkHover();
+            width: 100%;
+            padding: 15px 0;
+            background-color: $dark;
+            color: $light;
+            transition: 0.4s;
+            font-weight: 600;
+            text-transform: uppercase;
+            border-radius: 1.5rem 0;
+        }
+    }
+}

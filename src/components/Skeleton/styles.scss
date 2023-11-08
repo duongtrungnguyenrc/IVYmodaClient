@@ -1,0 +1,82 @@
+.rectangular, .skeleton-item {
+    background-color: #f7f7f7;
+    background-image: -webkit-linear-gradient(left, #ececec 0px, #f4f4f4 40px, #ececec 80px);
+    background-image: -o-linear-gradient(left, #ececec 0px, #f4f4f4 40px, #ececec 80px);
+    background-image: linear-gradient(90deg, #ececec 0px, #f4f4f4 40px, #ececec 80px);
+    background-size: 250px;
+    -webkit-animation: shine-loading 2s infinite ease-out;
+            animation: shine-loading 2s infinite ease-out;
+}
+
+.text {
+    font-size: inherit;
+    min-height: 1em;
+    background: #ececec;
+    background-image: -webkit-linear-gradient(left, #ececec 0px, #f4f4f4 40px, #ececec 80px);
+    background-image: -o-linear-gradient(left, #ececec 0px, #f4f4f4 40px, #ececec 80px);
+    background-image: linear-gradient(90deg, #ececec 0px, #f4f4f4 40px, #ececec 80px);
+    background-size: 250px;
+    border-radius: 5px;
+    -webkit-animation: shine-loading-text 2s infinite linear;
+            animation: shine-loading-text 2s infinite linear;
+            animation-delay: 0.2s;
+}
+
+.round {
+  font-size: inherit;
+  min-height: 1em;
+  background: #ececec;
+  background-image: -webkit-linear-gradient(left, #ececec 0px, #f4f4f4 40px, #ececec 80px);
+  background-image: -o-linear-gradient(left, #ececec 0px, #f4f4f4 40px, #ececec 80px);
+  background-image: linear-gradient(90deg, #ececec 0px, #f4f4f4 40px, #ececec 80px);
+  background-size: 250px;
+  border-radius: 50%;
+  -webkit-animation: shine-loading-text 2s infinite linear;
+          animation: shine-loading-text 2s infinite linear;
+          animation-delay: 0.2s;
+}
+
+
+@-webkit-keyframes shine-loading {
+    0% {
+        background-position: -32px;
+    }
+    100% {
+        background-position: 208px;
+    }
+}
+
+
+@keyframes shine-loading {
+0% {
+        background-position: -32px;
+    }
+    100% {
+        background-position: 208px;
+    }
+}
+
+@-webkit-keyframes shine-loading-text {
+    0% {
+      background-position: -100px;
+    }
+    100% {
+      background-position: 140px;
+    }
+}
+  
+  @keyframes shine-loading-text {
+    0% {
+      background-position: -100px;
+    }
+    100% {
+      background-position: 140px;
+    }
+}
+
+// MOBILE RESPONSIVE
+@media only screen and (max-width: 1024px) {
+  .text {
+    font-size: 0.875em;
+  }
+}

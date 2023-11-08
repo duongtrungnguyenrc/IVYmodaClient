@@ -1,0 +1,67 @@
+@import '../../assets/GeneralDefine.scss';
+
+.product-gallery {
+    display: flex;
+    width: 50%;
+    padding: 0rem 1rem;
+    margin-bottom: 30px;
+
+    .main-gallery-frame {
+        width: 690px;
+        min-width: 83%;
+        height: 66rem;
+        overflow: hidden;
+        cursor:cell;
+        
+        .main-gallery-image {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+        }
+    }
+
+    .side-gallery-frame {
+        @include centerContent();
+
+        height: 66rem;
+        width: calc(100% - 690px);
+        min-width: 18%;
+        flex-direction: column;
+        padding-left: 15px;
+
+        .slider-gallery {
+            width: 100%;
+            height: 90%;
+            overflow: hidden;
+            margin: 20px 0;
+            display: flex;
+            flex-direction: column;
+
+            div {
+                flex-shrink: 0;
+                width: 100%;
+                height: 25%;
+                padding: 4px 0;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+
+        }
+
+        button {
+            background-color: transparent;
+            border: none;
+            padding: 5px 20px;
+
+            svg {
+                font-size: 17px;
+                fill: $grey-text-color;
+            }
+        }
+    }
+
+}

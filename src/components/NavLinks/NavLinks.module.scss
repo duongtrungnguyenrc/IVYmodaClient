@@ -1,0 +1,34 @@
+@import '../../assets/GeneralDefine.scss';
+
+.nav-links {
+    margin-bottom: 2.5rem;
+    ul {
+      display: flex;
+      gap: 3.3rem;
+      padding: 16px 0;
+      border-bottom: 1px solid #f7f8f9;
+
+      li {
+        position: relative;
+
+        &:nth-child(n+2) {
+          &::before {
+            content: '';
+            display: flex;
+            width: 0.4rem;
+            height: 1px;
+            position: absolute;
+            left: -2rem;
+            top: 50%;
+            background-color: $dark;
+          }
+        }
+
+        a {
+          color: $dark-grey;
+          font-weight: 400;
+          font-size: 14px;
+        }
+      }
+    }
+  }

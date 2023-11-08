@@ -1,0 +1,64 @@
+@import '../../assets/GeneralDefine.scss';
+
+.special-products-category {
+    margin-bottom: 50px;
+
+    .title-section {
+      text-align: center;
+      font-size: 2.1rem;
+      line-height: 32px;
+      font-weight: 600;
+      letter-spacing: 0.125rem;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    .body-section {
+      margin-bottom: 30px;
+      min-height: 32rem;
+
+      .product-category {
+        @include centerContent();
+        margin-bottom: 30px;
+
+        ul {
+          display: flex;
+          gap: 56px;
+
+          .product-category-tab {
+            font-size: 1.25rem;
+            color: $dark-grey;
+            cursor: pointer;
+
+            &.active {
+              color: $dark;
+              border-bottom: 2px solid $dark;
+            }
+          }
+
+        }
+        
+      }
+      .products{
+        .products-wrapper{
+          padding: 0 10px;
+          display: flex;
+          overflow-y: scroll;
+          gap: 2rem;
+        }
+
+      }
+    }
+
+    .footer-section {
+      @include centerContent();
+
+      .view-all-nav {
+        display: flex;
+        
+        a {
+          @include mainWhiteButton(24px)
+        }
+      }
+    }
+  }

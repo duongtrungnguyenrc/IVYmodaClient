@@ -1,0 +1,166 @@
+@import '../../assets/GeneralDefine.scss';
+
+$side-bar-width: 270px;
+    .side-bar {
+    width: $side-bar-width;
+    height: 100%;
+    position: sticky;
+
+    ul {
+
+        li {
+        margin-bottom: 16px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #f6f7f8;
+
+        p {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.125rem;
+            color: $dark-grey;
+            font-weight: 300;
+            line-height: 20px;
+            
+            &.active {
+                & ~ .sub-list-side {
+                    opacity: 1;
+                    display: flex;
+                }
+
+                .show-icon {
+                    display: none;
+                }
+
+                .hide-icon {
+                    display: block;
+                }
+            }
+
+            button {
+                background-color: transparent;
+                border: none;
+                span {
+                    padding: 7px;
+                    line-height: 10px;
+                    cursor: pointer;
+    
+                    &.hide-icon {
+                        display: none;
+                    }
+    
+                    svg {
+                        font-size: 0.875rem;
+                        fill: $dark-grey;
+                    }
+                }
+            }
+        }
+
+        .sub-list-side {
+            display: none;
+            flex-wrap: wrap;
+            gap: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s ease; 
+
+
+            .item-sub-list {
+                display: flex;
+                text-align: center;
+                min-width: 47px;
+
+                input {
+                    display: none;
+
+                    &:checked ~ span {
+                        border-color: $dark;
+                        color: $dark;
+                    }
+                }
+
+                span {
+                    width: 100%;
+                    padding: 0.3rem 0;
+                    border-radius: 10px 0;
+                    border: 1px solid $medium-grey;
+                    font-size: 0.875rem;
+                    color: $dark-grey;
+                    cursor: pointer;
+                }
+
+            }
+
+            .color-option {
+                position: relative;
+
+                input {
+                    display: none;
+
+                    &:checked ~ span::before {
+                        content: "";
+                        left: 8px;
+                        top: 4px;
+                        width: 5px;
+                        height: 9px;
+                        border: solid #FFF;
+                        border-width: 0 1px 1px 0;
+                        -webkit-transform: rotate(45deg);
+                        -ms-transform: rotate(45deg);
+                        transform: rotate(45deg);
+                        display: block;
+                        position: absolute;
+                    }
+                }
+
+                span {
+                    width: 20px;
+                    height: 20px;
+                    display: flex;
+                    border-radius: 50%;
+                    overflow: hidden;
+                    cursor: pointer;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                }
+            }
+
+            .range-price {
+                input[type="range"] {
+                    color: #000;
+                    &:nth-child(even) {
+                        transform: rotate(180deg);
+                    }
+                }
+            }
+        }
+        }
+    }
+
+    .btn-group {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        padding: 1rem 0;
+        
+        .btn {
+            font-size: 1rem;
+            font-weight: 300;
+            padding: 13px 24px;
+            border: 1px solid;
+            color: #000;
+            border-radius: 20px 0;
+            position: relative;
+            background-color: #fff;
+
+            &:last-child {
+                background-color: #000;
+                color: #fff;
+            }
+        }
+    }
+
+}

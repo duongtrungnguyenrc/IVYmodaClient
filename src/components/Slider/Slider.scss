@@ -1,0 +1,40 @@
+@import '../../assets/GeneralDefine.scss';
+
+.slide {
+  margin-bottom: 40px;
+  position: relative;
+
+  &::before {
+    content: '';
+    width: 100%;
+    height: 98%;
+    border: 1px solid $medium-grey;
+    border-radius: 80px 0;
+    position: absolute;
+    right: -10px;
+    bottom: 0;
+  }
+
+  .carousel-indicators {
+    display: flex;
+    gap: 16px;
+
+    button {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: transparent;
+      border: 1px solid $light;
+
+      &.active {
+        background-color: $light;
+      }
+    }
+  }
+
+  .carousel-inner {
+    border-top-left-radius: 80px;
+    border-bottom-right-radius: 80px;
+    overflow: hidden;
+  }
+}
