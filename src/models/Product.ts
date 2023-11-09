@@ -21,6 +21,14 @@ export interface ProductModel {
     basePrice: number;
     salePrice: number;
     inStock: number;
-    preserveDetail: string;
+    preserveMethods: {  
+        id: number;
+        description: string;
+    }[];
+    model: {
+        height: string;
+        weight: string;
+        threeRoundMeasurements: string;
+    }
     tag: string
 }

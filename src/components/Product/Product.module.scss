@@ -1,148 +1,147 @@
 @import '../../assets/GeneralDefine.scss';
 
 .product {
-    width: calc(25% - 24px);
-    min-width: 20rem;
-    position: relative;
-  
-    .info-tag {
-      position: absolute;
-      left: -7px;
-      height: 30px;
-      line-height: 16px;
-      font-size: 0.875rem;
-      font-weight: 600;
-      padding: 7px 18px 7px 15px;
-      color: $light;
-      text-transform: capitalize;
-      z-index: 3;
-      
-      &.new {
-        background: url(https://pubcdn.ivymoda.com/ivy2/images/bg_news.png) center center / cover no-repeat;
-      }
-  
-      &.best-seller {
-        background: url(https://pubcdn.ivymoda.com/ivy2/images/bg-seller.png) no-repeat center/cover;
-      }
-  
-      &::before {
-        content: '';
-        position: absolute;
-        width: 0px;
-        height: 0px;
-        border-top: 17px solid rgb(215, 56, 49);
-        border-left: 7px solid transparent;
-        bottom: -16px;
-        left: 0px;
-        z-index: -1;
-      }
-    }
-  
-    .images {
-      position: relative;
-      height: 31rem;
-      margin-bottom: 13px;
-  
-      &:hover {
-        .image {
-          opacity: 0;
-        }
-  
-        .image.hover-image {
-          opacity: 1;
-        }
-      }
-  
-      a {
-        .image {
-          width: 100%;
-          height: 100%;
-          position: absolute;
-          object-fit: cover;
-          transition: 0.3s;
-    
-          &.hover-image {
-            opacity: 0;
-          }
-        }
-      }
-    }
-  
-    .product-info {
-      display: flex;
-      flex-direction: column;
-      gap: 13px;
-      
-      .color-list {
-        display: flex;
-        justify-content: space-between;
-  
-        ul {
-          display: flex;
-          gap: 10px;
-  
-          .color-option {
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            position: relative;
-  
-            &.checked::before {
-              content: "";
-              left: 7px;
-              top: 7px;
-              width: 5px;
-              height: 9px;
-              border: solid #FFF;
-              border-width: 0 1px 1px 0;
-              -webkit-transform: rotate(45deg);
-              -ms-transform: rotate(45deg);
-              transform: rotate(45deg);
-              display: block;
-              position: absolute;
-            }
-            
-            img {
-              width: 100%;
-              border-radius: 50%;
-              height: 100%;
-              object-fit: cover;
-            }
-  
-          }
-        }
-      }
-  
-      .product-name {
-        a {
-          font-weight: 300;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-          color: $dark-grey;
-        }
-      }
-  
-      .product-price {
-        font-weight: 600;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-  
-        a {
-          width: max-content;
-          height: max-content;
-          padding: 10px 10px;
-          background-color: $dark;
-          color: $light;
-          border-radius: 8px 0;
-          @include centerContent();
+  width: calc(25% - 24px);
+  min-width: 20rem;
+  position: relative;
 
-          svg {
-            font-size: 1rem;
-            fill: $light;
-          }
+  .info-tag {
+    position: absolute;
+    left: -7px;
+    height: 30px;
+    line-height: 16px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 7px 18px 7px 15px;
+    color: $light;
+    text-transform: capitalize;
+    z-index: 3;
+    
+    &.new {
+      background: url(https://pubcdn.ivymoda.com/ivy2/images/bg_news.png) center center / cover no-repeat;
+    }
+
+    &.best-seller {
+      background: url(https://pubcdn.ivymoda.com/ivy2/images/bg-seller.png) no-repeat center/cover;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      width: 0px;
+      height: 0px;
+      border-top: 17px solid rgb(215, 56, 49);
+      border-left: 7px solid transparent;
+      bottom: -16px;
+      left: 0px;
+      z-index: -1;
+    }
+  }
+
+  .images {
+    position: relative;
+    height: 31rem;
+    margin-bottom: 13px;
+
+    &:hover {
+      .image {
+        opacity: 0;
+      }
+
+      .image.hover-image {
+        opacity: 1;
+      }
+    }
+
+    a {
+      .image {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        object-fit: cover;
+        transition: 0.3s;
+  
+        &.hover-image {
+          opacity: 0;
         }
       }
     }
   }
-  
+
+  .product-info {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+    
+    .color-list {
+      display: flex;
+      justify-content: space-between;
+
+      ul {
+        display: flex;
+        gap: 10px;
+
+        .color-option {
+          width: 18px;
+          height: 18px;
+          border-radius: 50%;
+          position: relative;
+
+          &.checked::before {
+            content: "";
+            left: 7px;
+            top: 7px;
+            width: 5px;
+            height: 9px;
+            border: solid #FFF;
+            border-width: 0 1px 1px 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+            display: block;
+            position: absolute;
+          }
+          
+          img {
+            width: 100%;
+            border-radius: 50%;
+            height: 100%;
+            object-fit: cover;
+          }
+
+        }
+      }
+    }
+
+    .product-name {
+      a {
+        font-weight: 300;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        color: $dark-grey;
+      }
+    }
+
+    .product-price {
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      a {
+        width: max-content;
+        height: max-content;
+        padding: 10px 10px;
+        background-color: $dark;
+        color: $light;
+        border-radius: 8px 0;
+        @include centerContent();
+
+        svg {
+          font-size: 1rem;
+          fill: $light;
+        }
+      }
+    }
+  }
+}

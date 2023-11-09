@@ -6,7 +6,7 @@ import SideBarItem from './sidebar-item';
 import './styles.css';
 import LogoutIcon from '../../assets/icons/logout.svg';
 
-function SideBar ({ menu }) {
+function SideBar ({ menu } : { menu: {id: number, icon: string, path: string, title: string}[]}) {
     const location = useLocation();
 
     const [active, setActive] = useState(1);
@@ -19,7 +19,7 @@ function SideBar ({ menu }) {
         });
     }, [location.pathname])
 
-    const __navigate = (id) => {
+    const __navigate = (id: number) => {
         setActive(id);
     }
 

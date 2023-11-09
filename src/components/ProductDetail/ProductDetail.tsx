@@ -3,17 +3,30 @@ import { ChevronDownIcon, ChevronUpIcon, HeartIcon, MinusIcon, PlusIcon, RulerIc
 import styles from "./ProductDetail.module.scss";
 import classNames from "classnames/bind";
 import { ProductModel } from "../../models/Product";
+import CartProduct from "../../models/CartProduct";
 
 const cx = classNames.bind(styles);
 
 
-const MoreDetail = () => {
+const MoreDetail = ({ product } : { product: ProductModel }) => {
     const [ isShow, setIsShow ] = useState(false);
 
     const handleShowContent = () => {
        setIsShow((prevState) => {
         return prevState ? false : true;
        })
+    };
+
+    const handleAddToCart = () => {
+        const item : CartProduct = {
+            id: product.id,
+            imgSrc: product.images[0].src,
+            productName: product.name,
+            salePrice: product.salePrice,
+            quantity: 1,
+            size: string,
+            color: string,
+        }
     }
     
     return (
@@ -33,23 +46,20 @@ const MoreDetail = () => {
                 <div className={cx("content")}>
                     <div className={cx("content-tab", { "show": isShow }, "active")}>
                         <p>
-                            Đầm dáng suông được nhấn ở eo. Thân trên đầm bao gồm những chi tiết: cổ tròn, phía trước là chi tiết cut-out phối cùng các hạt ngọc trai tạo điểm nhấn, tay ngắn hơi phồng nhẹ. Dáng đầm dài qua gối, phía sau có xẻ tà.
+                            { product.description }
                         </p>
                         <div className={cx("sub-content-tab")}>
-                            <p>
-                                Một thiết kế đầm phù hợp cho nàng thanh lịch và yêu thích phong cách cổ điển. Chất liệu tuysi cao cấp giữ form dáng đầm luôn chỉn chu, thiết kế đầm giúp che khuyết điểm và tôn lên vóc dáng nàng. Phần cut-out hướng ánh mắt người nhìn vào những chi tiết đắt giá. Mẫu đầm dành cho nàng đi làm và đi sự kiện.
-                            </p>
                             <p>
                                 <strong>Mẫu mặc size:</strong> M
                             </p>
                             <p>
-                                <strong>Chiều cao:</strong> 1m67
+                                <strong>Chiều cao:</strong> { product.model.height }
                             </p>
                             <p>
-                                <strong>Cân nặng:</strong> 50kg
+                                <strong>Cân nặng:</strong> { product.model.weight }
                             </p>
                             <p>
-                                <strong>Số đo:</strong>  83-65-93cm
+                                <strong>Số đo:</strong>  { product.model.threeRoundMeasurements }
                             </p>
                             <p>Mẫu mặc size M Lưu ý: Màu sắc sản phẩm thực tế sẽ có sự chênh lệch nhỏ so với ảnh do điều kiện ánh sáng khi chụp và màu sắc hiển thị qua màn hình máy tính/ điện thoại.</p>
                         </div>
@@ -81,21 +91,11 @@ const MoreDetail = () => {
                             Đầm dáng suông được nhấn ở eo. Thân trên đầm bao gồm những chi tiết: cổ tròn, phía trước là chi tiết cut-out phối cùng các hạt ngọc trai tạo điểm nhấn, tay ngắn hơi phồng nhẹ. Dáng đầm dài qua gối, phía sau có xẻ tà.
                         </p>
                         <div className={cx("sub-content-tab")}>
-                            <p>
-                                Một thiết kế đầm phù hợp cho nàng thanh lịch và yêu thích phong cách cổ điển. Chất liệu tuysi cao cấp giữ form dáng đầm luôn chỉn chu, thiết kế đầm giúp che khuyết điểm và tôn lên vóc dáng nàng. Phần cut-out hướng ánh mắt người nhìn vào những chi tiết đắt giá. Mẫu đầm dành cho nàng đi làm và đi sự kiện.
-                            </p>
-                            <p>
-                                <strong>Mẫu mặc size:</strong> M
-                            </p>
-                            <p>
-                                <strong>Chiều cao:</strong> 1m67
-                            </p>
-                            <p>
-                                <strong>Cân nặng:</strong> 50kg
-                            </p>
-                            <p>
-                                <strong>Số đo:</strong>  83-65-93cm
-                            </p>
+                           {
+                            product.preserveMethods.map((method) => {
+                                return <p key={ method.id }>{ method.description }</p>
+                            })
+                           }
                         </div>
                     </div>
                 </div>
@@ -194,7 +194,7 @@ const ProductDetail = ({ product } : { product: ProductModel }) => {
             </div>
             <div className={cx("product-detail", "actions-detail")}>
                 <div className={cx("actions-group")}>
-                    <button className={cx("dark-btn")}>Thêm vào giỏ</button>
+                    <button className={cx("dark-btn")} onClick={() => handleAddToCart()}>Thêm vào giỏ</button>
                     <button>Mua hàng</button>
                     <button className={cx("love")}><HeartIcon/></button>
                 </div>
@@ -202,7 +202,7 @@ const ProductDetail = ({ product } : { product: ProductModel }) => {
                     <a href="">Tìm tại cửa hàng</a>
                 </div>
             </div>
-            <MemoizedMoreDetail/>
+            <MemoizedMoreDetail product={product}/>
         </div>
      );
 }

@@ -12,10 +12,13 @@ const cx = classNames.bind(styles);
 
 const Header = ({ cartItems } : { cartItems : CartProduct[] }) => {
     const [ data, setData ] = useState<{ name: string, groups: ProductGroup[] }[]>();
-    let token = "";
+    const [ token, setToken ] = useState<string>();
 
     useEffect(() => {
-        token = localStorage.getItem("token") + "";
+        const authToken = localStorage.getItem("token");
+        if(authToken) {
+            setToken(authToken);
+        }
         const fetchAllGroups = async () => {
             const response = await axios.get("product-group/all");
             if(response.status == 200) {
@@ -23,10 +26,7 @@ const Header = ({ cartItems } : { cartItems : CartProduct[] }) => {
             }
         }
         fetchAllGroups();
-    }, []);
-    
-    console.log("Render");
-    
+    }, []);    
     
     return (
         <header className={cx("header")}>
@@ -314,7 +314,7 @@ const Header = ({ cartItems } : { cartItems : CartProduct[] }) => {
                             </ul>
                         </div>
                         <div className={cx("action")}>
-                            <a href={ token  ? "/login" : "/setting" }>
+                            <a href={ token && token == "" ? "/login" : "/setting" }>
                                 <UserIcon/>
                             </a>
                         </div>
@@ -370,7 +370,9 @@ const Header = ({ cartItems } : { cartItems : CartProduct[] }) => {
                                             <strong>{ cartItems?.reduce((sumPrice, value) => sumPrice + value.salePrice, 0).toLocaleString("en") }đ</strong>
                                         </div>
                                         <div className={cx("slip-cart-actions")}>
-                                            <a href="/login">ĐĂNG NHẬP</a>
+                                            {
+                                                token && token == "" && <a href="/login">ĐĂNG NHẬP</a>
+                                            }
                                             <a href="/cart">XEM GIỎ HÀNG</a>
                                         </div>
                                     </div>

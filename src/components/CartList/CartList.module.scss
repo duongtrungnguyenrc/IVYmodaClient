@@ -37,7 +37,7 @@
 
                 td {
                     padding: 24px 16px;
-                    vertical-align: top;
+                    vertical-align: center;
 
                     & > * {
                         font-size: 14px;
@@ -54,6 +54,8 @@
 
                         .cart-item-img {
                             width: 25%;
+                            min-width: 150px;
+
                             a {
                                 display: flex;
                                 height: 200px;
@@ -68,12 +70,22 @@
 
                         .cart-item-content {
                             padding-left: 16px;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
 
                             a {
+                                width: 100%;
                                 h3 {
                                     font-size: 16px;
                                     font-weight: 400;
                                 }
+                            }
+
+                            .cart-item-properties {
+                                width: 100%;
+                                display: flex;
+                                gap: 10px;
                             }
                         }
                     }

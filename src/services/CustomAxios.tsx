@@ -1,9 +1,11 @@
 import axios from "axios";
 
 const token = localStorage.getItem("token");
-const instance =  axios.create({
+console.log(token);
+
+const instance = axios.create({
     headers: token ? {
-        token: token
+        Token: "Bearer " + token
     } : {},
     baseURL : "http://localhost:8080/api/",
 })

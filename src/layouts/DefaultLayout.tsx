@@ -3,18 +3,20 @@ import { Footer, Header } from "../components";
 import CartProduct from "../models/CartProduct";
 import cartService from "../services/CartService";
 
-const DefaultLayout = ({ children } : { children : ReactNode }) => {
-  const [ cartData, setCartData ] = useState<CartProduct[]>([]);
+const DefaultLayout = ({ children, cartData } : { children : ReactNode, cartData?: CartProduct[]  }) => {
+    const [ internalCartData, setInternalCartData ] = useState<CartProduct[]>([]);
 
-  useEffect(() => {
-    const cart: CartProduct[] = cartService.load();        
-    if (cart) {
-      setCartData(cart);
-    }
-}, [])
+    useEffect(() => {
+      if(!cartData) {
+        const cart: CartProduct[] = cartService.load();        
+        if (cart) {
+          setInternalCartData(cart);
+        }
+      }
+  }, []);
   return (
     <>
-        <Header cartItems={cartData}/>
+        <Header cartItems={cartData ? cartData : internalCartData}/>
             { children }
         <Footer/>
     </>

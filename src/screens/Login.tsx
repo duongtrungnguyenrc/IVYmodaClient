@@ -25,8 +25,15 @@ const Login = () => {
                   error: `Sai email hoặc mật khẩu 🤯`
                 }
             );
-            if(response) {
-                location.href = "/";
+            if(response.status === 200) {
+                localStorage.setItem("token", response.data.data.token);
+                localStorage.setItem("uid", response.data.data.userId);
+                if(response.data.data.role === "ROLE_ADMIN") {
+                    location.href = "/admin/products";
+                }
+                else {
+                    location.href = "/";
+                }
             }
         } catch (error) {
             console.log(error);

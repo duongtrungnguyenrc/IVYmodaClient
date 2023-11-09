@@ -1,33 +1,29 @@
 import { useEffect, useState } from "react";
-import { CartList, CartSummary, ProcessBar, Content, Footer, Header } from "../components";
+import { CartList, Content } from "../components";
 import CartProduct from "../models/CartProduct";
 import cartService from "../services/CartService";
+import DefaultLayout from "../layouts/DefaultLayout";
 
 const Cart = () => {
     const [ cartData, setCartData ] = useState<CartProduct[]>([]);
 
     useEffect(() => {
+        loadCardData();
+    }, []);
+
+    const loadCardData = () => {
         const cart: CartProduct[] = cartService.load();        
         if (cart) {
           setCartData(cart);
         }
-    }, [])
+    };
+
     return ( 
-        <>
-            <Header cartItems={(cartData)}/>
+        <DefaultLayout cartData={cartData}>
             <Content>
-                <section className="w-100 pt-5 d-flex">
-                    <div className="col-xl-9 col-lg-8 px-3">
-                        <ProcessBar currentProcess={1}/>
-                        <CartList cartData={cartData}/>
-                    </div>
-                    <div className="col-xl-3 col-lg-4 px-3">
-                        <CartSummary cartData={cartData}/>
-                    </div>
-                </section>
+                <CartList cartData={cartData} reloadCallback={loadCardData}/>
             </Content>
-            <Footer/>
-        </>
+        </DefaultLayout>
      );
 }
 

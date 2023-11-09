@@ -127,7 +127,7 @@ function DashboardHeader ({ updateCallback } : { updateCallback: Function }) {
 
             {/* add data form */}
 
-            <div className="modal" id="addProductModal">
+            <div className="modal fade" id="addProductModal">
                 <div className="modal-dialog modal-xl">
                     <div className="modal-content">
 
@@ -294,7 +294,7 @@ function DashboardHeader ({ updateCallback } : { updateCallback: Function }) {
                                                     />
                                                 </div>
                                                 <div className="col-12 mt-3">
-                                                    <button type="button" className="btn btn-primary w-100" onClick={() => handleSaveResource()}>Thêm</button>
+                                                    <button type="button" className="btn btn-dark w-100" onClick={() => handleSaveResource()}>Thêm</button>
                                                 </div>
                                                 <div className="" style={{marginTop: "45px"}}>
                                                     <label htmlFor="preserveMethods" className="form-label">Thông tin bảo quản:</label>
@@ -307,8 +307,8 @@ function DashboardHeader ({ updateCallback } : { updateCallback: Function }) {
                             </div>
 
                             <div className="modal-footer">
-                                <button type="reset" className="btn btn-danger" data-bs-dismiss="modal">Hủy</button>
-                                <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">Lưu</button>
+                                <button type="reset" className="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                <button type="submit" className="btn btn-dark" data-bs-dismiss="modal">Lưu</button>
                             </div>
                         </form>
                     </div>

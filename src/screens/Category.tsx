@@ -8,6 +8,7 @@ import CartProduct from "../models/CartProduct";
 import cartService from "../services/CartService";
 import ProductFilter from "../models/ProductFilter";
 import DefaultLayout from "../layouts/DefaultLayout";
+import { toast } from "react-toastify";
 
 interface ResponseData {
     page: number;
@@ -61,11 +62,12 @@ const Categories = () => {
     
     const handleAddCartItem = (product: CartProduct) => {
         cartService.add(product);
+        toast.success(`Đã thêm ${product.productName} vào giỏ hàng!`);
         setCartData(cartService.load());
     }
 
     return (
-        <DefaultLayout>
+        <DefaultLayout cartData={cartData}>
             <Content>
                 <NavLinks/>
 
