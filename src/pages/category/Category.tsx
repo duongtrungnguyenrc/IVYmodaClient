@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Footer, Header, NavLinks, Product, Content, ProductsFilter } from "../../components";
+import { NavLinks, Product, Content, ProductsFilter } from "../../components";
 import Pagination from 'react-bootstrap/Pagination';
 import axios from "../../services/CustomAxios";
 import { ProductModel } from "../../models/Product";

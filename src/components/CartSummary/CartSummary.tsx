@@ -9,7 +9,7 @@ import { AxiosError, AxiosResponse } from 'axios';
 
 const cx = classNames.bind(styles);
 
-const CartSummary = ({ cartData, reload } : { cartData : CartProduct[], reload ?: Function }) => {
+const CartSummary = ({ cartData, reload } : { cartData : CartProduct[], reload : Function }) => {
 
   const handleCreateOrder = async () => {
     if(cartData.length > 0) {
@@ -20,6 +20,7 @@ const CartSummary = ({ cartData, reload } : { cartData : CartProduct[], reload ?
       try {
         await axios.post("/order/create", { productIds: payload });
         toast.success("Tạo đơn hàng thành công");
+        reload();
         cartService.clear();
       }
       catch(e) {
