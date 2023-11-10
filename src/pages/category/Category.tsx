@@ -100,7 +100,7 @@ const Categories = () => {
                                     <Pagination.First onClick={() => handleSetPage(1)}/>
                                     <Pagination.Prev onClick={() => page > 1 ? handleSetPage(page - 1) : undefined}/>
                                     {
-                                        new Array(data.totalPages).fill(null).map((value, index) => {
+                                        new Array(data.totalPages).fill(null).map((_value, index) => {
                                             const i = index + 1;
                                             return <Pagination.Item key={index} active={page === i} onClick={() => handleSetPage(index + 1)}>{i}</Pagination.Item>
                                         })
