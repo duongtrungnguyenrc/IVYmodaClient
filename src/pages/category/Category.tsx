@@ -1,14 +1,19 @@
 import { useEffect, useState } from "react";
-import { Footer, Header, NavLinks, Product, Content, ProductsFilter } from "../components";
+import { Footer, Header, NavLinks, Product, Content, ProductsFilter } from "../../components";
 import Pagination from 'react-bootstrap/Pagination';
-import axios from "../services/CustomAxios";
-import { ProductModel } from "../models/Product";
+import axios from "../../services/CustomAxios";
+import { ProductModel } from "../../models/Product";
 import { useSearchParams } from "react-router-dom";
-import CartProduct from "../models/CartProduct";
-import cartService from "../services/CartService";
-import ProductFilter from "../models/ProductFilter";
-import DefaultLayout from "../layouts/DefaultLayout";
+import CartProduct from "../../models/CartProduct";
+import cartService from "../../services/CartService";
+import ProductFilter from "../../models/ProductFilter";
+import DefaultLayout from "../../layouts/DefaultLayout";
 import { toast } from "react-toastify";
+
+import styles from "./styles.module.scss";
+import classNames from "classnames/bind";
+
+const cx = classNames.bind(styles);
 
 interface ResponseData {
     page: number;
@@ -73,36 +78,37 @@ const Categories = () => {
 
                 {/* PRODUCTS LIST */}
 
-                <section className="products-category">
+                <section className="products-category row">
 
-                    <ProductsFilter applyFilterCallback={setFilter}/>    
+                    <div className="col-2"><ProductsFilter applyFilterCallback={setFilter}/></div>   
 
-                    <div className="main-products">
+                    <div className="ps-5 col-10">
                         <div className="main-title">
                             <h2>{category}</h2>
                         </div>
                         {
-                            data.products.length != 0 ?  <>
-                                        <div className="main-products-list">
-                                            {
-                                                data.products.map((value, index) => {
-                                                    return <Product key={index} product={value} addItemCallback={handleAddCartItem}/>
-                                                })
-                                            }
-                                        </div>
-                                        <Pagination>
-                                            <Pagination.First onClick={() => handleSetPage(1)}/>
-                                            <Pagination.Prev onClick={() => page > 1 ? handleSetPage(page - 1) : undefined}/>
-                                            {
-                                                new Array(data.totalPages).fill(null).map((value, index) => {
-                                                    const i = index + 1;
-                                                    return <Pagination.Item key={index} active={page === i} onClick={() => handleSetPage(index + 1)}>{i}</Pagination.Item>
-                                                })
-                                            }
-                                            <Pagination.Next onClick={() => page < data.totalPages ? handleSetPage(page + 1) : undefined}/>
-                                            <Pagination.Last onClick={() => handleSetPage(data.totalPages)}/>
-                                        </Pagination>
-                                    </> : "Không tìm thấy sản phẩm phù hợp !"
+                            data.products.length != 0 ?  
+                            <>
+                                <div className={cx("main-products-list")}>
+                                    {
+                                        data.products.map((value, index) => {
+                                            return <Product key={index} product={value} addItemCallback={handleAddCartItem}/>
+                                        })
+                                    }
+                                </div>
+                                <Pagination>
+                                    <Pagination.First onClick={() => handleSetPage(1)}/>
+                                    <Pagination.Prev onClick={() => page > 1 ? handleSetPage(page - 1) : undefined}/>
+                                    {
+                                        new Array(data.totalPages).fill(null).map((value, index) => {
+                                            const i = index + 1;
+                                            return <Pagination.Item key={index} active={page === i} onClick={() => handleSetPage(index + 1)}>{i}</Pagination.Item>
+                                        })
+                                    }
+                                    <Pagination.Next onClick={() => page < data.totalPages ? handleSetPage(page + 1) : undefined}/>
+                                    <Pagination.Last onClick={() => handleSetPage(data.totalPages)}/>
+                                </Pagination>
+                            </> : "Không tìm thấy sản phẩm phù hợp !"
                         }
                     </div>
                 </section>

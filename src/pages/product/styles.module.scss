@@ -1,0 +1,268 @@
+@import "../../assets/GeneralDefine.scss";
+
+.product-details {
+    padding: 0 1rem 0 8.5rem;
+    width: 50%;
+
+    h1 {
+        font-weight: 600;
+        font-size: 30px;
+        line-height: 32px;
+    }
+
+    .product-detail {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        margin-top: 24px;
+        color: #6c6d70;
+
+        &.detail-sub-info {
+            gap: 2rem;
+
+            .customer-rated {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                
+                .rated-stars {
+                    transform: translate(0, -15%);
+                    svg {
+                        font-size: 1.1rem;
+                        fill: #eeb256;
+                    }
+                }
+
+                span {
+                    font-size: 16px;
+                }
+            }
+
+        }
+
+        &.price-detail{
+            
+            p {
+                font-weight: 600;
+                font-size: 24px;
+                line-height: 32px;
+                color: $dark;
+            }
+        }
+
+        &.color-detail {
+            flex-direction: column;
+            align-items: start;
+
+            p {
+                font-weight: 600;
+                font-size: 20px;
+                line-height: 32px;
+                color: $dark;
+            }
+
+            .color-options {
+                display: flex;
+                gap: 0.8rem;
+                margin-top: 10px;
+
+                .color-option {
+                    position: relative;
+
+                    input {
+                        display: none;
+
+                        &:checked ~ span::before {
+                            content: "";
+                            left: 8px;
+                            top: 4px;
+                            width: 5px;
+                            height: 9px;
+                            border: solid #FFF;
+                            border-width: 0 1px 1px 0;
+                            -webkit-transform: rotate(45deg);
+                            -ms-transform: rotate(45deg);
+                            transform: rotate(45deg);
+                            display: block;
+                            position: absolute;
+                        }
+                    }
+
+                    span {
+                        width: 20px;
+                        height: 20px;
+                        display: flex;
+                        border-radius: 50%;
+                        overflow: hidden;
+                        cursor: pointer;
+
+                        img {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                        }
+                    }
+                }
+            }
+        }
+
+        &.size-detail {
+            flex-direction: column;
+            align-items: start;
+
+            .size-options {
+                display: flex;
+                gap: 10px;
+                .size-option {
+                    cursor: pointer;
+
+                    input {
+                        display: none;
+
+                        &:checked ~ span {
+                            border-color: $dark;
+                            color: $dark
+                        }
+                    }
+
+                    span {
+                        @include centerContent();
+                        width: 3rem;
+                        height: 2rem;
+                        border: 1px solid $light-grey;
+                        color: $dark-grey;
+                    }
+                }
+            }
+
+            a {
+                font-size: 0.7rem;
+                color: $dark-grey;
+                margin-top: 8px;
+
+                &:hover {
+                    color: $navbar-text-color;
+                    svg {
+                        fill: $navbar-text-color;
+                    }
+                }
+
+                svg {
+                    fill: $dark-grey;
+                    margin-right: 7px;
+                }
+            }
+        }
+
+        &.quantity-detail {
+            gap: 30px;
+
+            p {
+                font-weight: 500;
+            }
+
+            .quantity-group {
+                width: max-content;
+                position: relative;
+                display: flex;
+                justify-content: space-between;
+                margin-left: 12px;
+        
+                input {
+                  width: 100px;
+                  height: 48px;
+                  border: 1px solid $light-grey;
+                  text-align: center;
+        
+                  &::placeholder {
+                    font-size: 1rem;
+                  }
+
+                  &:focus {
+                    outline: unset;
+                  }
+                }
+        
+                button {
+                  @include centerContent();
+        
+                  height: 48px;
+                  width: 50px;
+                  font-size: 0.625rem;
+                  position: absolute;
+                  background-color: $light;
+                  border: 1px solid $light-grey;
+                  border-radius: 15px 0px;
+        
+                  &.minus {
+                    left: 0;
+                    transform: translate(-50%, 0%)
+                  }
+        
+                  &.plus {
+                    right: 0;
+                    transform: translate(50%, 0%);
+                  }
+        
+                  &:hover {
+                    @include lightHover();
+                  }
+
+                  svg {
+                    font-size: 0.75rem;
+                    fill: $dark-grey;
+                  }
+                }
+              }
+        }
+
+        &.actions-detail {
+            flex-direction: column;
+            align-items: start;
+            gap: 1.125rem;
+            border-bottom: 1px solid $light-grey;
+
+            .actions-group {
+                display: flex;
+                gap: 1rem;
+
+                button {
+                    padding: 13px 24px;
+                    border-radius: 18px 0;
+                    background-color: transparent;
+                    border: 1px solid;
+                    font-weight: 500;
+                    @include lightHover();
+
+                    &.dark-btn {
+                        background-color: $dark;
+                        color: $light;
+                        @include darkHover();
+                    }
+
+                    &.love {
+                        padding: 13px 16px;
+                        svg {
+                            font-size: 1.25rem;
+                        }
+                    }
+                }
+            }
+
+            .find-at-store {
+                height: 48px;
+
+                a {
+                    text-decoration: underline;
+                    font-size: 0.875rem;
+                    color: $dark-grey;
+                    font-weight: 300;
+
+                    &:hover {
+                        color: $navbar-text-color;
+                    }
+                }
+            }
+        }
+    }
+}

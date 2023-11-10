@@ -1,14 +1,13 @@
-import { useState, memo } from "react";
-import { ChevronDownIcon, ChevronUpIcon, HeartIcon, MinusIcon, PlusIcon, RulerIcon, StarIcon } from "../../assets/Icons";
+import { useState} from "react";
+import { ChevronDownIcon, ChevronUpIcon} from "../../assets/Icons";
 import styles from "./ProductDetail.module.scss";
 import classNames from "classnames/bind";
 import { ProductModel } from "../../models/Product";
-import CartProduct from "../../models/CartProduct";
 
 const cx = classNames.bind(styles);
 
 
-const MoreDetail = ({ product } : { product: ProductModel }) => {
+const ProductDetail = ({ product } : { product: ProductModel }) => {
     const [ isShow, setIsShow ] = useState(false);
 
     const handleShowContent = () => {
@@ -16,18 +15,6 @@ const MoreDetail = ({ product } : { product: ProductModel }) => {
         return prevState ? false : true;
        })
     };
-
-    const handleAddToCart = () => {
-        const item : CartProduct = {
-            id: product.id,
-            imgSrc: product.images[0].src,
-            productName: product.name,
-            salePrice: product.salePrice,
-            quantity: 1,
-            size: string,
-            color: string,
-        }
-    }
     
     return (
         <div className={cx("product-detail", "more-detail")}>
@@ -110,101 +97,6 @@ const MoreDetail = ({ product } : { product: ProductModel }) => {
             </div>
         </div>
     )
-}
-
-const MemoizedMoreDetail = memo(MoreDetail);
-
-const ProductDetail = ({ product } : { product: ProductModel }) => {
-    const [ activeData, setActiveData ] = useState<{ color: string, size: string, quantity: number }>({ color: product.colors[0].name, size: "", quantity: 1 });
-
-    const setQuantity = (quantity : number) => {
-        setActiveData((prevState) => { 
-            return {...prevState, quantity: quantity};
-         })
-    }
-
-    const decreaseQuantity = () => {
-        if(activeData.quantity > 1) {
-            setQuantity(activeData.quantity - 1);
-        }
-    }
-
-    const increaseQuantity = () => {
-        if(activeData.quantity < 10) {
-            setQuantity(activeData.quantity + 1);
-        }
-    }
-    
-    return ( 
-        <div className={cx("product-details")}>
-            <h1>{product.name}</h1>
-            <div className={cx("product-detail", "detail-sub-info")}>
-                <p>SKU: 45S2770</p>
-                <div className={cx("customer-rated")}>
-                    <div className={cx("rated-stars")}>
-                        <StarIcon/>
-                        <StarIcon/>
-                        <StarIcon/>
-                        <StarIcon/>
-                        <StarIcon/>
-                    </div>
-                    <span>(1 Đánh giá)</span>
-                </div>
-            </div>
-            <div className={cx("product-detail", "price-detail")}>
-                <p>{product.salePrice.toLocaleString('en-US')} VNĐ</p>
-            </div>
-            <div className={cx("product-detail", "color-detail")}>
-                <p>Màu sắc: { activeData.color }</p>
-                <div className={cx("color-options")}>
-                    {
-                        product?.colors.map((color) => {
-                            return  <label className={cx("color-option", "active")}>
-                                        <input type="radio" name="color" value={color.id} defaultChecked/>
-                                        <span>
-                                            <img src={color.src} alt={color.name} />
-                                        </span>
-                                    </label>
-                        })
-                    }
-                </div>
-            </div>
-            <div className={cx("product-detail", "size-detail")}>
-                <div className={cx("size-options")}>
-                    {
-                        product?.sizes.map((size) => {
-                            return (
-                                <label key={size.id} className={cx("size-option", "active")}>
-                                    <input type="radio" name="size" defaultChecked/>
-                                    <span>{size.name}</span>
-                                </label>
-                            )
-                        })
-                    }
-                </div>
-                <a href=""><RulerIcon/>Kiểm tra size của bạn</a>
-            </div>
-            <div className={cx("product-detail", "quantity-detail")}>
-                <p>Số lượng</p>
-                <div className={cx("quantity-group")}>
-                    <button className={cx("minus")} onClick={() => decreaseQuantity()}><MinusIcon/></button>
-                    <input type="text" value={activeData.quantity + "" }/>
-                    <button className={cx("plus")} onClick={() => increaseQuantity()}><PlusIcon/></button>
-                </div>
-            </div>
-            <div className={cx("product-detail", "actions-detail")}>
-                <div className={cx("actions-group")}>
-                    <button className={cx("dark-btn")} onClick={() => handleAddToCart()}>Thêm vào giỏ</button>
-                    <button>Mua hàng</button>
-                    <button className={cx("love")}><HeartIcon/></button>
-                </div>
-                <div className={cx("find-at-store")}>
-                    <a href="">Tìm tại cửa hàng</a>
-                </div>
-            </div>
-            <MemoizedMoreDetail product={product}/>
-        </div>
-     );
 }
 
 export default ProductDetail;

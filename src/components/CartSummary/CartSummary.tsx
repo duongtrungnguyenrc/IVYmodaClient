@@ -2,10 +2,44 @@ import classNames from 'classnames/bind';
 import styles from './CartSummary.module.scss';
 import { AlertIcon, CheckIcon } from '../../assets/Icons';
 import CartProduct from '../../models/CartProduct';
+import axios from '../../services/CustomAxios';
+import { toast } from 'react-toastify';
+import cartService from '../../services/CartService';
+import { AxiosError, AxiosResponse } from 'axios';
 
 const cx = classNames.bind(styles);
 
-const CartSummary = ({ cartData } : { cartData : CartProduct[] }) => {
+const CartSummary = ({ cartData, reload } : { cartData : CartProduct[], reload ?: Function }) => {
+
+  const handleCreateOrder = async () => {
+    if(cartData.length > 0) {
+      const payload : number[] = [];
+      cartData.forEach(item => {
+        payload.push(item.id);
+      })
+      try {
+        await axios.post("/order/create", { productIds: payload });
+        toast.success("Tạo đơn hàng thành công");
+        cartService.clear();
+      }
+      catch(e) {
+        const err = e as AxiosError
+                      
+        if ((err.response as AxiosResponse).status === 401 || (err.response as AxiosResponse).status === 403) {
+            toast.error((err.response as AxiosResponse).data.message);
+            localStorage.removeItem("token");
+            setTimeout(() => {
+                location.href = "/login";
+            }, 3000);
+        } else {
+            console.error("Lỗi không xác định!");
+        }
+      }
+    }
+    else {
+      toast.error("Vui lòng thêm sản phẩm vào giỏ hàng!");
+    }
+  }
   
   return (
     <div className={cx("cart-summary")}>
@@ -39,7 +73,7 @@ const CartSummary = ({ cartData } : { cartData : CartProduct[] }) => {
         </div>
       </div>
       <div className={cx("purchase")}>
-        <a href="">Đặt hàng</a>
+        <button onClick={() => handleCreateOrder()}>Đặt hàng</button>
       </div>
     </div>
   );

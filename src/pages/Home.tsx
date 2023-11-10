@@ -1,10 +1,8 @@
-import { Header, Footer, Slider, Content, MainGallery } from "../components"; 
+import { Slider, Content, MainGallery } from "../components"; 
 import SpecialCategory from "../components/SpecialCategory/SpecialCategory";
 import DefaultLayout from "../layouts/DefaultLayout";
 
-const Home = () => {
-    console.log("homerender");
-    
+const Home = () => {    
     return (
         <DefaultLayout>
             <Content>
@@ -14,11 +12,11 @@ const Home = () => {
 
                 {/* HOME NEW PREOD */}
 
-                {/* <SpecialCategory title={"new arrival"} apiKey={"new_items"}/> */}
+                <SpecialCategory title={"new arrival"} tag="NEW"/>
 
                 {/* HOME BEST SELLER */}
 
-                {/* <SpecialCategory title={"best seller"} apiKey={"best_seller_items"}/> */}
+                <SpecialCategory title={"best seller"} tag="BEST_SELLER"/>
 
                 {/* MAIN GALLERY */}
 

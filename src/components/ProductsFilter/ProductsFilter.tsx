@@ -8,7 +8,7 @@ import { useSearchParams } from "react-router-dom";
 
 const cx = classNames.bind(styles);
 
-function ProductsFilter({ applyFilterCallback } : { applyFilterCallback: Function }) {
+function ProductsFilter({ applyFilterCallback, category } : { applyFilterCallback: Function, category ?: string }) {
     const [ activeOptions, setActiveOptions ] = useState<number[]>([]);
     const [ filterOptions, setFilterOptions ] = useState<{ sizes: { id: number, name: string }[], colors: { id: number, src: string, name: string }[] }>();
     const [filter, setFilter] = useState<ProductFilter>({
@@ -18,19 +18,23 @@ function ProductsFilter({ applyFilterCallback } : { applyFilterCallback: Functio
         rangePrice: { min: 0, max: 10000000 }
     });
     const params = useSearchParams();
-    const category = params[0].get("name");
+    const categoryParams = params[0].get("name") || params[0].get("category");
       
 
     useEffect(() => {
         const fetchFilterOptions = async () => {
-            const response = await axios.get(`/product/filter?category=${category}`);
+            let query = "/product/filter";
+            if(category) {
+                query += `?category=${category && category != "" ? category : categoryParams}`;
+            }
+            const response = await axios.get(query);
 
             if(response.status === 200) {
                 setFilterOptions(response.data);                
             }
         }
         fetchFilterOptions();        
-    }, []);
+    }, [category, categoryParams]);
 
     
     const toggleFilterGroup = (activeOption: number) => {

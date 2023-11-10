@@ -4,7 +4,13 @@ interface CartProduct {
     productName: string;
     salePrice: number;
     quantity: number;
-    size: string;
-    color: string;
+    size: {
+        id: number;
+        name: string;
+    };
+    color: {
+        id: number;
+        name: string;
+    };
 }
 export default CartProduct;

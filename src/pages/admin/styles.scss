@@ -19,7 +19,6 @@
     overflow: auto;
 }
 .dashboard-content-container {
-    margin: 1em;
     background-color: white;
     border: none;
     border-radius: 10px;
@@ -34,50 +33,69 @@
     flex-direction: row;
     justify-content: space-between;
 }
-.dashboard-content-header h2 {
-    margin-top: auto;
-    margin-bottom: auto;
-    color: black;
-    font-size: xx-large;
-    font-weight: 700;
+.dashboard-filter {
+    select, form {
+        height: 100%!important;
+    }
+    input {
+        outline: none;
+    }
+    
+    .dashboard-content-header h2 {
+        margin-top: auto;
+        margin-bottom: auto;
+        color: black;
+        font-size: xx-large;
+        font-weight: 700;
+    }
+
+    .dashboard-content-search {
+        font-weight: 400;
+        line-height: 1.4em;
+        letter-spacing: 0.009em;
+        box-sizing: border-box;
+        cursor: text;
+        display: inline-flex;
+        -webkit-box-align: center;
+        align-items: center;
+        position: relative;
+        background-color: transparent;
+        font-size: 0.875rem;
+        border-radius: 0.375rem;
+        border: 1px solid gray;
+    }
+    .dashboard-content-search:focus {
+        outline: #2D83B5 auto 1px;
+    }
+    .dashboard-content-input {
+        font-style: inherit;
+        font-variant: inherit;
+        font-weight: inherit;
+        font-stretch: inherit;
+        line-height: inherit;
+        font-family: inherit;
+        letter-spacing: inherit;
+        border: 0px;
+        box-sizing: content-box;
+        background: none transparent;   
+        margin: 0px;
+        display: block;
+        min-width: 0px;
+        width: 100%;
+        color: #000000;
+        font-size: 0.75rem;
+        padding: 0.625rem;
+    }
 }
-.dashboard-content-search {
-    font-weight: 400;
-    line-height: 1.4em;
-    letter-spacing: 0.009em;
-    box-sizing: border-box;
-    cursor: text;
-    display: inline-flex;
-    -webkit-box-align: center;
-    align-items: center;
-    position: relative;
-    background-color: transparent;
-    font-size: 0.875rem;
-    border-radius: 0.375rem;
-    border: 1px solid gray;
+
+.filter-frame {
+    padding: 1.5rem;
+    padding-right: 1rem;
+    background-color: #fff;
+    border-radius: 10px;
+    height: max-content;
 }
-.dashboard-content-search:focus {
-    outline: #2D83B5 auto 1px;
-}
-.dashboard-content-input {
-    font-style: inherit;
-    font-variant: inherit;
-    font-weight: inherit;
-    font-stretch: inherit;
-    line-height: inherit;
-    font-family: inherit;
-    letter-spacing: inherit;
-    border: 0px;
-    box-sizing: content-box;
-    background: none transparent;   
-    margin: 0px;
-    display: block;
-    min-width: 0px;
-    width: 100%;
-    color: #000000;
-    font-size: 0.75rem;
-    padding: 0.625rem;
-}
+
 table {
     width: 100%;
     margin: auto;

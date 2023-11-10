@@ -81,7 +81,14 @@ function DashboardHeader ({ updateCallback } : { updateCallback: Function }) {
             setResourceType(value as string);
         }
         else if(name.trim() === "preserveMethods") {
-            setNewProduct((prevState) => ({ ...prevState, preserveMethods: [...prevState.preserveMethods, { description: value }] }));
+            setNewProduct((prevState) => (
+                { ...prevState, 
+                    preserveMethods: [
+                        ...prevState.preserveMethods, 
+                        { description: value }
+                    ] 
+                }
+            ));
         }
         else {
             setNewProduct((prevState) => ({ ...prevState, [name]: value }));
@@ -122,7 +129,7 @@ function DashboardHeader ({ updateCallback } : { updateCallback: Function }) {
                     className="dashbord-header-icon" />
                 <img
                     className="dashbord-header-avatar"
-                    src="https://reqres.in/img/faces/9-image.jpg" />
+                    src="https://scontent.fsgn19-1.fna.fbcdn.net/v/t39.30808-6/328887108_3335174406743347_335102794497930188_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeHUOCZ-4c-8ZB-mLYcGdXnSKw-AAZl0fTArD4ABmXR9MNwWAO2V14gZN9_nca8gzEqaa6ef4yTp8zSOtrh4SS8a&_nc_ohc=OszKM2yYze4AX-ks-w_&_nc_ht=scontent.fsgn19-1.fna&oh=00_AfDVaCGqHFiUAOA0I_aUl6obg9WrBMD0peIFYzWx5WzCPg&oe=65529CDE" />
             </div>
 
             {/* add data form */}

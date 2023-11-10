@@ -1,10 +1,11 @@
 @import '../../assets/GeneralDefine.scss';
 
-$side-bar-width: 270px;
-    .side-bar {
-    width: $side-bar-width;
+$side-bar-width: 300px;
+.side-bar {
+    min-width: $side-bar-width;
     height: 100%;
     position: sticky;
+    top: 0px;
 
     ul {
 
@@ -129,6 +130,8 @@ $side-bar-width: 270px;
             }
 
             .range-price {
+                width: 100%;
+                
                 input[type="range"] {
                     color: #000;
                     &:nth-child(even) {

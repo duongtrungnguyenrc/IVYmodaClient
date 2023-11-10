@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import classnames from "classnames/bind";
 
 import styles from "./SpecialCategory.module.scss";
@@ -9,29 +9,20 @@ import axios from "../../services/CustomAxios";
 
 const cx = classnames.bind(styles);
 
-interface apiResponse {
-    totalPages: number;
-    page: number;
-    products: ProductModel[];
-}
-
-
-function SpecialCategory({ title, apiRoute } : { title : string, apiRoute : string}) {
+function SpecialCategory({ title, tag } : { title : string, tag : string}) {
     const [activeCategoryTab, setActiveCategoryTab] = useState(0);
-    const [specialProducts, setSpecialProducts] = useState<apiResponse>();
+    const [specialProducts, setSpecialProducts] = useState<{ type: string, products: ProductModel[] }[]>();
 
     useEffect(() => {   
-       fetchData();
-    }, [])
+        const fetchData = async () => {
+            const response = await axios.get(`product/all-by-tag?tag=${tag}`);        
+                if(response.data) {
+                    setSpecialProducts(response.data.data);
+                }
+        };
 
-    const fetchData = async () => {
-        const response = await axios.get(`${apiRoute}`);
-        console.log(response);
-        
-            if(response.data) {
-                setSpecialProducts(response.data.data);
-            }
-    };
+        fetchData();
+    }, [])
 
     return ( 
         <section className={cx("special-products-category")}>
@@ -41,35 +32,32 @@ function SpecialCategory({ title, apiRoute } : { title : string, apiRoute : stri
             <div className={cx("body-section")}>
                 <div className={cx("product-category")}>
                     <ul>
-                        {/* {
+                        {
                             specialProducts?.map((value, index) => {
                                 return <li 
-                                    key={index} 
-                                    className = {cx("product-category-tab", { 
-                                                        "active" : index === activeCategoryTab
-                                                    })
-                                                }
-                                    onClick={() => setActiveCategoryTab(index)}
-                                    >
-                                        {value.type}
-                                    </li>
+                                        key={ index } 
+                                        className = { cx("product-category-tab", { "active" : index === activeCategoryTab }) }
+                                        onClick={ () => setActiveCategoryTab(index) }
+                                        > 
+                                            {value.type}
+                                        </li>
                             })
-                        } */}
+                        }
                     </ul>
                 </div>
                 <div className={cx("products")}>
                     <div className={cx("products-wrapper")}>
-                        {
-                            specialProducts && specialProducts.products.map((value, index) => {
-                                return <Product key={index} product={value}/>
-                            })
-                        }
+                    {
+                        specialProducts && specialProducts[activeCategoryTab]?.products.map(product => {
+                            return <Product key={product.type} product={product} addItemCallback={() => {}}/>
+                        })
+                    }
                     </div>
                 </div>
             </div>
             <div className={cx("footer-section")}>
                 <div className={cx("view-all-nav")}>
-                    <a href="">Xem tất cả</a>
+                    <a href="/category?group=ladies&name=Áo%20sơ%20mi">Xem tất cả</a>
                 </div>
             </div>
         </section>

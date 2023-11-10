@@ -20,12 +20,17 @@ const Product = ({ product, addItemCallback } : { product: ProductModel, addItem
                 productName: product.name,
                 salePrice: product.salePrice,
                 quantity: 1,
-                size: "S",
-                color: "Red",
+                size: {
+                    id: 1,
+                    name: "S"
+                },
+                color: {
+                    id: product.colors[0].id,
+                    name: product.colors[0].name
+                },
             } as unknown as CartProduct
         );
-        console.log("add success");
-        
+                
     }
 
     return (

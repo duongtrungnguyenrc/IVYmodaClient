@@ -345,8 +345,8 @@ const Header = ({ cartItems } : { cartItems : CartProduct[] }) => {
                                                             <div className={cx("info")}>
                                                                 <h3><a href="">{item.productName}</a></h3>
                                                                 <div className={cx("properties")}>
-                                                                    <p>Màu sắc: { item.color }</p>
-                                                                    <p>Size: { item.size }</p>
+                                                                    <p>Màu sắc: { item.color.name }</p>
+                                                                    <p>Size: { item.size.name }</p>
                                                                 </div>
                                                                 <div className={cx("price-group")}>
                                                                     <div className={cx("quantity-group")}>

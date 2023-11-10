@@ -8,7 +8,6 @@ export { default as NavLinks } from "./NavLinks";
 export { default as ProductsFilter } from "./ProductsFilter";
 export { default as MainGallery } from "./MainGallery";
 export { default as ProductGallery } from "./ProductGallery";
-export { default as CartList } from "./CartList";
 export { default as CartSummary } from "./CartSummary";
 export { default as ProcessBar } from "./ProcessBar";
 export { default as Footer } from "./Footer";

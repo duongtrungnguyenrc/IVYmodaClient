@@ -1,0 +1,8 @@
+@import "../../assets/GeneralDefine.scss";
+
+.main-products-list {
+    width: 100%;
+    display: grid;
+    grid-gap: 24px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}

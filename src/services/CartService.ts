@@ -13,7 +13,7 @@ const cartService = {
     
       cart.forEach((item) => {
         if (item.id === product.id) {
-          updatedCart.push({ ...item, quantity: item.quantity + 1 });
+          updatedCart.push({ ...item, quantity: item.quantity + product.quantity });
           productInCart = true;
         } else {
           updatedCart.push(item);
@@ -36,6 +36,9 @@ const cartService = {
         }
       })
       Cookies.set("cart", JSON.stringify(updatedCart));
+    },
+    clear: () => {
+      Cookies.set("cart", "");
     }
       
 }

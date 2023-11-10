@@ -21,7 +21,9 @@ interface NewProduct {
     basePrice: number;
     salePrice: number;
     inStock: number;
-    preserveMethods: [];
+    preserveMethods: { description: string }[];
     tag: string;
+
+    [key: string]: any;
 }
 export default NewProduct;
