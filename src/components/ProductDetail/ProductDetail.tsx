@@ -9,6 +9,8 @@ const cx = classNames.bind(styles);
 
 const ProductDetail = ({ product } : { product: ProductModel }) => {
     const [ isShow, setIsShow ] = useState(false);
+    const [ activeTab, setActiveTab ] = useState(0);
+    const tabs = [ "Giới thiệu", "Chi tiết sản phẩm", "Bảo quản" ];
 
     const handleShowContent = () => {
        setIsShow((prevState) => {
@@ -19,19 +21,17 @@ const ProductDetail = ({ product } : { product: ProductModel }) => {
     return (
         <div className={cx("product-detail", "more-detail")}>
             <div className={cx("more-detail-tabs")}>
-                <div className={cx("more-detail-tab", "active")}>
-                    Giới thiệu
-                </div>
-                <div className={cx("more-detail-tab")}>
-                    Chi tiết sản phẩm
-                </div>
-                <div className={cx("more-detail-tab")}>
-                    Bảo quản
-                </div>
+                {
+                    tabs.map((tab, index) => {
+                        return  <div className={cx("more-detail-tab", { "active": index === activeTab })} onClick={() => setActiveTab(index)}>
+                                    { tab }
+                                </div>
+                    })
+                }
             </div>
             <div className={cx("tab-body")}>
                 <div className={cx("content")}>
-                    <div className={cx("content-tab", { "show": isShow }, "active")}>
+                    <div className={cx("content-tab", { "show": isShow }, { "active": activeTab === 0})}>
                         <p>
                             { product.description }
                         </p>
@@ -51,29 +51,18 @@ const ProductDetail = ({ product } : { product: ProductModel }) => {
                             <p>Mẫu mặc size M Lưu ý: Màu sắc sản phẩm thực tế sẽ có sự chênh lệch nhỏ so với ảnh do điều kiện ánh sáng khi chụp và màu sắc hiển thị qua màn hình máy tính/ điện thoại.</p>
                         </div>
                     </div>
-                    <div className={cx("content-tab")}>
+                    <div className={cx("content-tab", { "show": isShow }, { "active": activeTab === 1})}>
                         <p>
-                            Đầm dáng suông được nhấn ở eo. Thân trên đầm bao gồm những chi tiết: cổ tròn, phía trước là chi tiết cut-out phối cùng các hạt ngọc trai tạo điểm nhấn, tay ngắn hơi phồng nhẹ. Dáng đầm dài qua gối, phía sau có xẻ tà.
+                            <strong>Dòng sản phẩm</strong> { product.type }
                         </p>
-                        <div className={cx("sub-content-tab")}>
-                            <p>
-                                Một thiết kế đầm phù hợp cho nàng thanh lịch và yêu thích phong cách cổ điển. Chất liệu tuysi cao cấp giữ form dáng đầm luôn chỉn chu, thiết kế đầm giúp che khuyết điểm và tôn lên vóc dáng nàng. Phần cut-out hướng ánh mắt người nhìn vào những chi tiết đắt giá. Mẫu đầm dành cho nàng đi làm và đi sự kiện.
-                            </p>
-                            <p>
-                                <strong>Mẫu mặc size:</strong> M
-                            </p>
-                            <p>
-                                <strong>Chiều cao:</strong> 1m67
-                            </p>
-                            <p>
-                                <strong>Cân nặng:</strong> 50kg
-                            </p>
-                            <p>
-                                <strong>Số đo:</strong>  83-65-93cm
-                            </p>
-                        </div>
+                        <p>
+                            <strong>Nhóm sản phẩm</strong> { product.group }
+                        </p>
+                        <p>
+                            <strong>Loại sản phẩm</strong> { product.category }
+                        </p>
                     </div>
-                    <div className={cx("content-tab")}>
+                    <div className={cx("content-tab", { "show": isShow }, { "active": activeTab === 2})}>
                         <p>
                             Đầm dáng suông được nhấn ở eo. Thân trên đầm bao gồm những chi tiết: cổ tròn, phía trước là chi tiết cut-out phối cùng các hạt ngọc trai tạo điểm nhấn, tay ngắn hơi phồng nhẹ. Dáng đầm dài qua gối, phía sau có xẻ tà.
                         </p>

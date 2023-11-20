@@ -1,10 +1,11 @@
 import "./App.scss";
 import { Routes, Route } from "react-router-dom";
 import { Home, Category, Product, Cart, Login } from "./pages";
-import Orders from "./pages/admin";
+import Products from "./pages/admin/product";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import RegisterScreen from "./pages/register/Register";
+import RegisterScreen from "./pages/public/register/Register";
+import Order from "./pages/admin/order";
 
 function App() {
 
@@ -18,8 +19,8 @@ function App() {
         <Route  path="/cart" element={<Cart/>}/>
         <Route  path="/login" element={<Login/>}/>
         <Route  path="/register" element={<RegisterScreen/>}/>
-        <Route  path="/admin/" />
-        <Route  path="admin/products" element={<Orders/>}/>
+        <Route  path="/admin/products" element={<Products/>}/>
+        <Route  path="/admin" element={<Order/>}/>
       </Routes>
     </>
   )

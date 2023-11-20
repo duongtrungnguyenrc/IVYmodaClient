@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import { NavLinks, Product, Content, ProductsFilter } from "../../components";
+import { NavLinks, Product, Content, ProductsFilter, Skeleton } from "../../../components";
 import Pagination from 'react-bootstrap/Pagination';
-import axios from "../../services/CustomAxios";
-import { ProductModel } from "../../models/Product";
+import axios from "../../../services/CustomAxios";
+import { ProductModel } from "../../../models/Product";
 import { useSearchParams } from "react-router-dom";
-import CartProduct from "../../models/CartProduct";
-import cartService from "../../services/CartService";
-import ProductFilter from "../../models/ProductFilter";
-import DefaultLayout from "../../layouts/DefaultLayout";
+import CartProduct from "../../../models/CartProduct";
+import cartService from "../../../services/CartService";
+import ProductFilter from "../../../models/ProductFilter";
+import DefaultLayout from "../../../layouts/DefaultLayout";
 import { toast } from "react-toastify";
 
 import styles from "./styles.module.scss";
@@ -18,11 +18,11 @@ const cx = classNames.bind(styles);
 interface ResponseData {
     page: number;
     totalPages : number;
-    products: Array<ProductModel>;
+    products: Array<ProductModel> | null;
   }
 
 const Categories = () => {
-    const [ data, setData ] = useState<ResponseData>({ page: 1, totalPages: 0, products: [] });
+    const [ data, setData ] = useState<ResponseData>({ page: 1, totalPages: 0, products: null });
     const [ page, setPage ] = useState(1);
     const [filter, setFilter] = useState<ProductFilter>();
     const [ cartData, setCartData ] = useState<CartProduct[]>([]);
@@ -83,11 +83,12 @@ const Categories = () => {
                     <div className="col-2"><ProductsFilter applyFilterCallback={setFilter}/></div>   
 
                     <div className="ps-5 col-10">
-                        <div className="main-title">
+                        <div className="main-title mb-4">
                             <h2>{category}</h2>
                         </div>
                         {
-                            data.products.length != 0 ?  
+                            data.products ?
+                            (data.products.length != 0 ?  
                             <>
                                 <div className={cx("main-products-list")}>
                                     {
@@ -108,7 +109,26 @@ const Categories = () => {
                                     <Pagination.Next onClick={() => page < data.totalPages ? handleSetPage(page + 1) : undefined}/>
                                     <Pagination.Last onClick={() => handleSetPage(data.totalPages)}/>
                                 </Pagination>
-                            </> : "Không tìm thấy sản phẩm phù hợp !"
+                            </> : "Không tìm thấy sản phẩm phù hợp !") : 
+                            <div className={cx("main-products-list")}>
+                                {
+                                    Array(20).fill(null).map(() => {
+                                        return  <div>
+                                                    <Skeleton variant="rectangular" height={450}/>
+                                                    <div className="d-flex gap-2 mt-2">
+                                                        <Skeleton variant='round' width={20} height={20}/>
+                                                        <Skeleton variant='round' width={20} height={20}/>
+                                                        <Skeleton variant='round' width={20} height={20}/>
+                                                    </div>
+                                                    <Skeleton className="mt-3" variant="text" width={250}/>
+                                                    <div className="d-flex justify-content-between mt-3">
+                                                        <Skeleton variant="text" width={200}/>
+                                                        <Skeleton variant="rectangular" width={40} height={40}/>
+                                                    </div>
+                                                </div>
+                                    })
+                                }
+                            </div>
                         }
                     </div>
                 </section>

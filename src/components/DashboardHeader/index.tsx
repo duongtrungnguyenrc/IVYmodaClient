@@ -1,6 +1,6 @@
 
 import "./styles.scss";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import NewProduct from "../../models/NewProduct";
 import axios from "../../services/CustomAxios";
@@ -29,30 +29,13 @@ const emptyNewProduct : NewProduct = {
     tag: '',
 }
 
-function DashboardHeader ({ updateCallback } : { updateCallback: Function }) {
+interface GroupResponse {  id: Number, name: string, groups: ProductGroup[] }
+interface ModelResponse { id: number, height: string, width: string, threeRoundMeasurements: string }
+
+function DashboardHeader ({ updateCallback, groups, models } : { updateCallback: Function, groups?: GroupResponse[], models?: ModelResponse[] }) {
     const [newProduct, setNewProduct] = useState<NewProduct>(emptyNewProduct);
     const [resourceType, setResourceType] = useState<string>('');
     const [resource, setResource] = useState<{ name: string; src: string; extraCoefficient: number }>(emptyResource);
-    const [ data, setData ] = useState<{  id: Number, name: string, groups: ProductGroup[] }[]>();
-    const [ models, setModels ] = useState<{ id: number, height: string, width: string, threeRoundMeasurements: string }[]>();
-
-    useEffect(() => {
-        const fetchAllGroups = async () => {
-            const response = await axios.get("product-group/all");
-            if(response.status == 200) {
-                setData(response.data.data);                
-            }
-        }
-
-        const fetchAllModels = async () => {
-            const response = await axios.get("product-model/all");
-            if(response.status == 200) {
-                setModels(response.data.data);                
-            }
-        }
-        fetchAllGroups();
-        fetchAllModels();
-    }, []);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -116,10 +99,15 @@ function DashboardHeader ({ updateCallback } : { updateCallback: Function }) {
     return(
         <div className="dashbord-header-container">
             <button className="dashbord-header-btn" data-bs-toggle="modal" data-bs-target="#addProductModal">Thêm sản phẩm</button>
-            <div className="dashbord-header-right">
+            <div className="dashbord-header-right dropdown" >
+                <button data-bs-toggle="dropdown">
                 <img
                     className="dashbord-header-avatar"
                     src="https://scontent.fsgn19-1.fna.fbcdn.net/v/t39.30808-6/328887108_3335174406743347_335102794497930188_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeHUOCZ-4c-8ZB-mLYcGdXnSKw-AAZl0fTArD4ABmXR9MNwWAO2V14gZN9_nca8gzEqaa6ef4yTp8zSOtrh4SS8a&_nc_ohc=OszKM2yYze4AX-ks-w_&_nc_ht=scontent.fsgn19-1.fna&oh=00_AfDVaCGqHFiUAOA0I_aUl6obg9WrBMD0peIFYzWx5WzCPg&oe=65529CDE" />
+                </button>
+                <ul className="dropdown-menu">
+                    <li><a className="dropdown-item" href="/login" onClick={() => localStorage.removeItem("token")}>Đăng xuất</a></li>
+                </ul>
             </div>
 
             {/* add data form */}
@@ -141,7 +129,7 @@ function DashboardHeader ({ updateCallback } : { updateCallback: Function }) {
                                     <select id="group" className="form-select" name="group" onChange={handleChange}>
                                         <option selected disabled>Chọn nhóm sản phẩm</option>
                                         {
-                                            data?.map((generalGroup) => {
+                                            groups?.map((generalGroup) => {
                                                 return  <>
                                                             <option key={generalGroup.id + ""} value={generalGroup.id + ""} disabled>{ generalGroup.name.toUpperCase() }</option>
                                                             {
@@ -159,7 +147,7 @@ function DashboardHeader ({ updateCallback } : { updateCallback: Function }) {
                                     <select id="category" className="form-select" name="category" onChange={handleChange}>
                                         <option selected disabled>Chọn danh mục sản phẩm</option>
                                         {
-                                            data?.map((generalGroup) => {
+                                            groups?.map((generalGroup) => {
                                                 return  <>
                                                             {
                                                                 generalGroup.groups.map((group) => {

@@ -1,0 +1,88 @@
+@import "../../../assets/GeneralDefine.scss";
+
+.status {
+    border-radius: 30px;
+    padding: 7px 10px;
+    border: 1px solid;
+    background-color: #fff;
+
+    &.transporting {
+        border: none;
+        color: #fff;
+        background-color: #faaf00;
+    }
+
+    &.completed {
+        border: none;
+        color: #fff;
+        background-color: #519259;
+    }
+
+    &.rejected {
+      border: none;
+        color: #fff;
+        background-color: rgb(225, 8, 8);
+    }
+}
+
+.order-products {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 1rem;
+
+    .slip-cart-product {
+        display: flex;
+        gap: 12px;
+        border-bottom: 1px solid #F6F7F8;
+        padding: 1rem 0;
+    
+        img {
+          width: 64px;
+          height: 100%;
+        }
+    
+        .info {
+          max-width: 80%;
+          width: 80%;
+    
+          & > * , & > * a{
+            font-weight: 400;
+        
+          }
+    
+          h3{
+            a {font-size: 1rem;}
+          }
+        }
+    
+        .properties {
+          display: flex;
+          gap: 20px;
+    
+          p {
+            font-size: 0.875rem;
+          }
+        }
+    
+        .price-group {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+    
+          .quantity-group {
+            width: max-content;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+          }
+    
+          .price {
+            font-size: 0.875rem;
+            font-weight: bold;
+            color: #AC2F33;
+            margin: 0;
+          }
+        }
+    }
+}

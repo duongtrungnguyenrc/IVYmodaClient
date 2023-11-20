@@ -177,8 +177,10 @@
           font-size: 1.125rem;
           position: relative;
 
-          a {
+          a, button {
             color: $text-color;
+            background-color: transparent;
+            border: none;
             
             .number-cart-items {
               position: absolute;

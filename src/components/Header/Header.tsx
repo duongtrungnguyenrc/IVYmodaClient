@@ -6,19 +6,16 @@ import { GlassIcon, HeadPhoneIcon, MinusIcon, PlusIcon, ShoppingBagIcon, UserIco
 import axios from "../../services/CustomAxios";
 import { Skeleton } from '..';
 import CartProduct from '../../models/CartProduct';
+import { Link } from 'react-router-dom';
 
 
 const cx = classNames.bind(styles);
 
 const Header = ({ cartItems } : { cartItems : CartProduct[] }) => {
     const [ data, setData ] = useState<{ name: string, groups: ProductGroup[] }[]>();
-    const [ token, setToken ] = useState<string>();
 
+    const authToken = localStorage.getItem("token");
     useEffect(() => {
-        const authToken = localStorage.getItem("token");
-        if(authToken) {
-            setToken(authToken);
-        }
         const fetchAllGroups = async () => {
             const response = await axios.get("product-group/all");
             if(response.status == 200) {
@@ -26,7 +23,11 @@ const Header = ({ cartItems } : { cartItems : CartProduct[] }) => {
             }
         }
         fetchAllGroups();
-    }, []);    
+    }, []);  
+    
+    const handleLogOut = () => {
+        localStorage.removeItem("token");
+    }
     
     return (
         <header className={cx("header")}>
@@ -97,15 +98,6 @@ const Header = ({ cartItems } : { cartItems : CartProduct[] }) => {
                                 <li className={cx("category")}>
                                     <Skeleton variant='text' width={50}/>
                                 </li>
-                                {/* <li className={cx("category")}>
-                                    <Skeleton variant='text' width={50}/>
-                                </li>
-                                <li className={cx("category")}>
-                                    <Skeleton variant='text' width={50}/>
-                                </li>
-                                <li className={cx("category")}>
-                                    <Skeleton variant='text' width={50}/>
-                                </li> */}
                             </>
                         }
                         {/* <li className={cx("category")}>
@@ -292,9 +284,9 @@ const Header = ({ cartItems } : { cartItems : CartProduct[] }) => {
                     </ul>
                 </div>
                 <div className={cx("brand")}>
-                    <a href="/">
+                    <Link to="/">
                         <img src="https://pubcdn.ivymoda.com/ivy2/images/logo.png" alt="IVY MODA LOGO" />
-                    </a>
+                    </Link>
                 </div>
                 <div className={cx("control")}>
                     <form>
@@ -314,9 +306,20 @@ const Header = ({ cartItems } : { cartItems : CartProduct[] }) => {
                             </ul>
                         </div>
                         <div className={cx("action")}>
-                            <a href={ token && token == "" ? "/login" : "/setting" }>
-                                <UserIcon/>
-                            </a>
+                            <div className="dropdown">
+                                <button type="button" data-bs-toggle="dropdown">
+                                    <UserIcon/>
+                                </button>
+                                <ul className="dropdown-menu">
+                                    {
+                                        authToken && authToken != "" ?
+                                        <li><a className="dropdown-item" href='/login' onClick={() => handleLogOut()}>Đăng xuất</a></li>
+                                        : 
+                                        <li><a className="dropdown-item" href="/login">Đăng nhập</a></li>
+
+                                    }
+                                </ul>
+                            </div>
                         </div>
                         <div className={cx("action")}>
                             <a href="" type="button" data-bs-toggle="offcanvas" data-bs-target="#cart">
@@ -371,7 +374,7 @@ const Header = ({ cartItems } : { cartItems : CartProduct[] }) => {
                                         </div>
                                         <div className={cx("slip-cart-actions")}>
                                             {
-                                                token && token == "" && <a href="/login">ĐĂNG NHẬP</a>
+                                                (!authToken || authToken == "") && <a href="/login">ĐĂNG NHẬP</a>
                                             }
                                             <a href="/cart">XEM GIỎ HÀNG</a>
                                         </div>

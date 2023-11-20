@@ -1,12 +1,12 @@
 import classnames from "classnames/bind";
-import { Content } from "../../components";
-import DefaultLayout from "../../layouts/DefaultLayout";
+import { Content } from "../../../components";
+import DefaultLayout from "../../../layouts/DefaultLayout";
 import styles from "./styles.module.scss"
 import { ReactEventHandler, useEffect, useState } from "react";
 import axios from "axios";
 import { useDebouncedCallback } from "use-debounce";
-import NewUser from "../../models/NewUser";
-import customAxios from "../../services/CustomAxios";
+import NewUser from "../../../models/NewUser";
+import customAxios from "../../../services/CustomAxios";
 import { toast } from "react-toastify";
 
 const cx = classnames.bind(styles);
@@ -164,7 +164,7 @@ const RegisterScreen = () => {
         if(formData.password !== formData.confirmPassword) {
             toast.error("Mật khẩu không khớp!");
         }
-        else if(formData.capcha !== capcha) {
+        else if(formData.capcha.toLowerCase() !== capcha.toLowerCase()) {
             toast.error("Mã capcha không chính xác!");
         }
         else {

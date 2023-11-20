@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-
-import SideBarItem from './sidebar-item';
+import { Link, useLocation } from 'react-router-dom';
 
 import './styles.css';
 import LogoutIcon from '../../assets/icons/logout.svg';
@@ -38,9 +36,15 @@ function SideBar ({ menu } : { menu: {id: number, icon: string, path: string, ti
                     <div className='sidebar-items'>
                         {menu.map((item, index) => (
                             <div key={index} onClick={() => __navigate(item.id)}>
-                                <SideBarItem
-                                    active={item.id === active}
-                                    item={item} />
+                                <Link 
+                                    to={item.path} 
+                                    className={ item.id === active ? 'sidebar-item-active' : 'sidebar-item'} >
+                                        <img 
+                                            src={item.icon}
+                                            alt={`icon-${item.icon}`}
+                                            className='sidebar-item-icon' />
+                                        <span className='sidebar-item-label'>{item.title}</span>
+                                </Link>
                             </div>
                         ))}
                     </div>

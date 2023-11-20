@@ -1,8 +1,6 @@
 @import '../../assets/GeneralDefine.scss';
 
-$side-bar-width: 300px;
 .side-bar {
-    min-width: $side-bar-width;
     height: 100%;
     position: sticky;
     top: 0px;

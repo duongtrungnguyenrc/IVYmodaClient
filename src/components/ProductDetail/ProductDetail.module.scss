@@ -40,11 +40,13 @@
         }
 
         .tab-body {
+            width: 100%;
             padding: 2rem 0;
             position: relative;
 
             .content {
                 .content-tab {
+                    width: 100%;
                     display: none;
 
                     &.active {

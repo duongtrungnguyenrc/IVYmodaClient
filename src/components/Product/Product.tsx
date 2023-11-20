@@ -5,6 +5,7 @@ import { ProductModel } from "../../models/Product";
 import { HeartIcon, ShoppingBagIcon } from "../../assets/Icons";
 import { ReactEventHandler } from "react";
 import CartProduct from "../../models/CartProduct";
+import { toast } from "react-toastify";
 
 
 const cx = classnames.bind(styles);
@@ -27,10 +28,9 @@ const Product = ({ product, addItemCallback } : { product: ProductModel, addItem
                 color: {
                     id: product.colors[0].id,
                     name: product.colors[0].name
-                },
+                }            
             } as unknown as CartProduct
         );
-                
     }
 
     return (

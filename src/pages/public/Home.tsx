@@ -1,6 +1,6 @@
-import { Slider, Content, MainGallery } from "../components"; 
-import SpecialCategory from "../components/SpecialCategory/SpecialCategory";
-import DefaultLayout from "../layouts/DefaultLayout";
+import { Slider, Content, MainGallery } from "../../components"; 
+import SpecialCategory from "../../components/SpecialCategory/SpecialCategory";
+import DefaultLayout from "../../layouts/DefaultLayout";
 
 const Home = () => {    
     return (

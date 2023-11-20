@@ -49,7 +49,7 @@ function SpecialCategory({ title, tag } : { title : string, tag : string}) {
                     <div className={cx("products-wrapper")}>
                     {
                         specialProducts && specialProducts[activeCategoryTab]?.products.map(product => {
-                            return <Product key={product.type} product={product} addItemCallback={() => {}}/>
+                            return <Product key={product.id} product={product} addItemCallback={() => {}}/>
                         })
                     }
                     </div>

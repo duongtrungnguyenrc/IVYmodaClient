@@ -1,18 +1,19 @@
 import { useSearchParams } from 'react-router-dom';
-import { NavLinks, ProductDetail } from "../../components";
-import { Content, ProductGallery } from "../../components";
+import { NavLinks, ProductDetail } from "../../../components";
+import { Content, ProductGallery } from "../../../components";
 import { ChangeEvent, ChangeEventHandler, useEffect, useState } from 'react';
 
-import axios from '../../services/CustomAxios';
-import { ProductModel } from '../../models/Product';
-import DefaultLayout from '../../layouts/DefaultLayout';
+import axios from '../../../services/CustomAxios';
+import { ProductModel } from '../../../models/Product';
+import DefaultLayout from '../../../layouts/DefaultLayout';
 import { toast } from 'react-toastify';
-import cartService from '../../services/CartService';
+import cartService from '../../../services/CartService';
 
 import styles from "./styles.module.scss";
 import classNames from 'classnames/bind';
-import { HeartIcon, MinusIcon, PlusIcon, RulerIcon, StarIcon } from '../../assets/Icons';
-import CartProduct from '../../models/CartProduct';
+import { HeartIcon, MinusIcon, PlusIcon, RulerIcon, StarIcon } from '../../../assets/Icons';
+import CartProduct from '../../../models/CartProduct';
+import SpecialCategory from '../../../components/SpecialCategory';
 
 const cx = classNames.bind(styles);
 
@@ -110,7 +111,7 @@ function Product() {
                                         <div className={cx("product-details")}>
                                              <h1>{product.name}</h1>
                                              <div className={cx("product-detail", "detail-sub-info")}>
-                                                  <p>SKU: 45S2770</p>
+                                                  <p className='m-0'>SKU: { product.id }</p>
                                                   <div className={cx("customer-rated")}>
                                                        <div className={cx("rated-stars")}>
                                                        <StarIcon/>
@@ -179,7 +180,7 @@ function Product() {
                               )
                          }
                     </section>
-                    {/* <SpecialCategory title={"best seller"} apiRoute={"product/all?page=1&limit=10&Tag=BEST_SELLER"}/> */}
+                    <SpecialCategory title={"NEW ARRIVAL"} tag='NEW'/>
                </Content>
           </DefaultLayout>
      );

@@ -20,8 +20,8 @@ const CartSummary = ({ cartData, reload } : { cartData : CartProduct[], reload :
       try {
         await axios.post("/order/create", { productIds: payload });
         toast.success("Tạo đơn hàng thành công");
-        reload();
         cartService.clear();
+        reload();
       }
       catch(e) {
         const err = e as AxiosError
@@ -30,7 +30,7 @@ const CartSummary = ({ cartData, reload } : { cartData : CartProduct[], reload :
             toast.error((err.response as AxiosResponse).data.message);
             localStorage.removeItem("token");
             setTimeout(() => {
-                location.href = "/login";
+              location.href = "/login";
             }, 3000);
         } else {
             console.error("Lỗi không xác định!");

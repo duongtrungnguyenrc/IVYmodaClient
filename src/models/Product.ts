@@ -26,9 +26,11 @@ export interface ProductModel {
         description: string;
     }[];
     model: {
+        id: number
         height: string;
         weight: string;
         threeRoundMeasurements: string;
     }
-    tag: string
+    tag: string;
+    isValid: boolean;
 }

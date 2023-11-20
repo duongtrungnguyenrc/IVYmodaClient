@@ -1,4 +1,4 @@
-@import "../../assets/GeneralDefine.scss";
+@import "../../../assets/GeneralDefine.scss";
 
 
 .dashboard-container {
@@ -110,6 +110,7 @@ th {
     font-weight: 700;
     line-height: 1.25;
     letter-spacing: 0.035em;
+    text-wrap: nowrap;
     border-bottom: 0.05rem solid rgb(240, 242, 245);
 }
 tbody {

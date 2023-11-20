@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { CartSummary, Content } from "../../components";
-import CartProduct from "../../models/CartProduct";
-import cartService from "../../services/CartService";
-import DefaultLayout from "../../layouts/DefaultLayout";
+import { CartSummary, Content } from "../../../components";
+import CartProduct from "../../../models/CartProduct";
+import cartService from "../../../services/CartService";
+import DefaultLayout from "../../../layouts/DefaultLayout";
 import styles from "./styles.module.scss";
 import classNames from "classnames/bind";
-import { MinusIcon, PlusIcon, TrashIcon } from "../../assets/Icons";
+import { MinusIcon, PlusIcon, TrashIcon } from "../../../assets/Icons";
 import { toast } from "react-toastify";
 
 const cx = classNames.bind(styles);
@@ -20,6 +20,8 @@ const Cart = () => {
 
     const loadCardData = () => {
         const cart: CartProduct[] = cartService.load();        
+        console.log("load");
+        
         if (cart) {
           setCartData(cart);
         }
