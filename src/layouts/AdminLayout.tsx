@@ -4,12 +4,12 @@ import sidebar_menu from "../constants/sidebar-menu";
 
 const AdminLayout = ({ children } : { children : ReactNode }) => {
   return (
-    <section className="d-flex">
+    <main className="d-flex">
         <SideBar menu={sidebar_menu} />
         <div className="dashboard-body d-flex flex-column">
             { children }
         </div>
-    </section>
+    </main>
   );
 };
 export default AdminLayout;

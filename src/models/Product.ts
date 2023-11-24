@@ -1,6 +1,11 @@
+import ProductColor from "./ProductColor";
 import ProductImage from "./ProductImage";
+import ProductModel from "./ProductModel";
+import ProductPreserveMethod from "./ProductPreserveMethod";
+import ProductSize from "./ProductSize";
+import ProducrUpdateRecord from "./ProductUpdateRecord";
 
-export interface ProductModel {
+export default interface Product {
     id: number;
     type: string;
     group: string;
@@ -8,29 +13,13 @@ export interface ProductModel {
     name: string;
     images: ProductImage[];
     description: string;
-    colors: {
-        id: number;
-        name: string;
-        src: string;
-    }[];
-    sizes: {
-        id: number;
-        name: string;
-        extraCoefficient: number;
-    }[];
+    colors: ProductColor[];
+    sizes: ProductSize[];
     basePrice: number;
     salePrice: number;
     inStock: number;
-    preserveMethods: {  
-        id: number;
-        description: string;
-    }[];
-    model: {
-        id: number
-        height: string;
-        weight: string;
-        threeRoundMeasurements: string;
-    }
+    preserveMethods: ProductPreserveMethod[];
+    model: ProductModel;
     tag: string;
-    isValid: boolean;
+    updateRecords: ProducrUpdateRecord[];
 }

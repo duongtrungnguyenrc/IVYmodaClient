@@ -292,7 +292,7 @@ const RegisterScreen = () => {
                             </button>
                         </div>
                         <div className="form-check mt-3">
-                            <input className="form-check-input" type="checkbox" onChange={(e) => setPasswordVisible((e.target.checked))} required/>
+                            <input className="form-check-input" type="checkbox" onChange={(e) => setPasswordVisible((e.target.checked))}/>
                             <label className="form-check-label">Hiện mật khẩu</label>
                         </div>
                         <button type="submit" className={cx("submit-btn") + " w-100 mt-3"}>Đăng kí</button>

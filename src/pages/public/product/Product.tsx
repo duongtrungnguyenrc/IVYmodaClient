@@ -4,7 +4,7 @@ import { Content, ProductGallery } from "../../../components";
 import { ChangeEvent, ChangeEventHandler, useEffect, useState } from 'react';
 
 import axios from '../../../services/CustomAxios';
-import { ProductModel } from '../../../models/Product';
+import Product from '../../../models/Product';
 import DefaultLayout from '../../../layouts/DefaultLayout';
 import { toast } from 'react-toastify';
 import cartService from '../../../services/CartService';
@@ -19,9 +19,9 @@ const cx = classNames.bind(styles);
 
 interface OptionChoice { color: { id: number; name: string }; size: { id: number; name: string } }
 
-function Product() {
+function ProductPage() {
      const [searchParams] = useSearchParams();
-     const [ product, setProduct ] = useState<ProductModel>();
+     const [ product, setProduct ] = useState<Product>();
      const [ cartData, setCartData ] = useState<CartProduct[]>([]);
      const [ quantity, setQuantity ] = useState(1);
      const [ optionChoice, setOptionChoice ] = useState<OptionChoice>({ color: { id: 0, name: "" }, size: { id: 0, name: "" } });
@@ -69,6 +69,7 @@ function Product() {
                     quantity: quantity,
                     size: optionChoice?.size,
                     color: optionChoice?.color,
+                    sumPrice: product.salePrice * quantity
                };
 
                if(item.color.id == 0) {
@@ -186,4 +187,4 @@ function Product() {
      );
 }
 
-export default Product;
+export default ProductPage;

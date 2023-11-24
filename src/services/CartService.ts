@@ -37,6 +37,18 @@ const cartService = {
       })
       Cookies.set("cart", JSON.stringify(updatedCart));
     },
+    update: (product: CartProduct) => {
+      const cart: CartProduct[] = cartService.load();
+      const updatedCart: CartProduct[] = [];
+      cart.forEach(item => {
+        if(item.id != product.id) {
+          updatedCart.push(item);
+        } else {
+          updatedCart.push(product)
+        }
+      })
+      Cookies.set("cart", JSON.stringify(updatedCart));
+    },
     clear: () => {
       Cookies.set("cart", "");
     }

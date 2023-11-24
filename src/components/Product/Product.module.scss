@@ -128,19 +128,52 @@
       justify-content: space-between;
       align-items: center;
 
-      a {
-        width: max-content;
-        height: max-content;
-        padding: 10px 10px;
-        background-color: $dark;
-        color: $light;
-        border-radius: 8px 0;
-        @include centerContent();
+      .add-to-cart-frame {
+        position: relative;
 
-        svg {
-          font-size: 1rem;
-          fill: $light;
+        .add-to-cart-btn {
+          width: max-content;
+          height: max-content;
+          padding: 10px 10px;
+          background-color: $dark;
+          color: $light;
+          border-radius: 8px 0;
+          border: none;
+          @include centerContent();
+
+          svg {
+            fill: $light;
+            font-size: 1rem;
+          }
         }
+
+        .toggle-size-popup {
+          opacity: 0;
+          pointer-events: none;
+          position: absolute;
+          top: -230px;
+          left: -150%;
+          background-color: $light;
+          border: 1px solid $grey;
+          border-radius: 10px 0 10px 0;
+          transition: 0.5s;
+
+          &.active {
+            opacity: 1;
+            pointer-events: all;
+          }
+
+          li {
+            text-align: center;
+            padding: 10px 30px;
+            cursor: pointer;
+
+            &:hover {
+              background-color: $grey;
+            }
+          }
+        }
+
       }
     }
   }

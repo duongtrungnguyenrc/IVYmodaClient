@@ -8,7 +8,7 @@ import { useSearchParams } from "react-router-dom";
 
 const cx = classNames.bind(styles);
 
-function ProductsFilter({ applyFilterCallback, category } : { applyFilterCallback: Function, category ?: string }) {
+function ProductsFilter({ applyFilterCallback, category, group } : { applyFilterCallback: Function, category ?: string, group ?: string }) {
     const [ activeOptions, setActiveOptions ] = useState<number[]>([]);
     const [ filterOptions, setFilterOptions ] = useState<{ sizes: { id: number, name: string }[], colors: { id: number, src: string, name: string }[] }>();
     const [filter, setFilter] = useState<ProductFilter>({
@@ -19,13 +19,13 @@ function ProductsFilter({ applyFilterCallback, category } : { applyFilterCallbac
     });
     const params = useSearchParams();
     const categoryParams = params[0].get("name") || params[0].get("category");
-      
+    const groupParams = params[0].get("name") || params[0].get("group");
 
     useEffect(() => {
         const fetchFilterOptions = async () => {
             let query = "/product/filter";
             if(category) {
-                query += `?category=${category && category != "" ? category : categoryParams}`;
+                query += `?category=${category && category != "" ? category : categoryParams}&${group && group != "" ? group : groupParams}`;
             }
             const response = await axios.get(query);
 

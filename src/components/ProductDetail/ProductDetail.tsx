@@ -40,26 +40,26 @@ const ProductDetail = ({ product } : { product: ProductModel }) => {
                                 <strong>Mẫu mặc size:</strong> M
                             </p>
                             <p>
-                                <strong>Chiều cao:</strong> { product.model.height }
+                                <strong>Chiều cao:</strong> { product?.model?.height }
                             </p>
                             <p>
-                                <strong>Cân nặng:</strong> { product.model.weight }
+                                <strong>Cân nặng:</strong> { product?.model?.weight }
                             </p>
                             <p>
-                                <strong>Số đo:</strong>  { product.model.threeRoundMeasurements }
+                                <strong>Số đo:</strong>  { product?.model?.threeRoundMeasurements }
                             </p>
                             <p>Mẫu mặc size M Lưu ý: Màu sắc sản phẩm thực tế sẽ có sự chênh lệch nhỏ so với ảnh do điều kiện ánh sáng khi chụp và màu sắc hiển thị qua màn hình máy tính/ điện thoại.</p>
                         </div>
                     </div>
                     <div className={cx("content-tab", { "show": isShow }, { "active": activeTab === 1})}>
                         <p>
-                            <strong>Dòng sản phẩm</strong> { product.type }
+                            <strong>Dòng sản phẩm</strong> { product?.type }
                         </p>
                         <p>
-                            <strong>Nhóm sản phẩm</strong> { product.group }
+                            <strong>Nhóm sản phẩm</strong> { product?.group }
                         </p>
                         <p>
-                            <strong>Loại sản phẩm</strong> { product.category }
+                            <strong>Loại sản phẩm</strong> { product?.category }
                         </p>
                     </div>
                     <div className={cx("content-tab", { "show": isShow }, { "active": activeTab === 2})}>

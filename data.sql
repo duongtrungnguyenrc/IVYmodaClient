@@ -78,5 +78,5 @@ INSERT INTO `product_category`(`id`, `name`, `group_id`) VALUES (null,'Phá»¥ kiá
 
 
 
-INSERT INTO `product_model`(`id`, `height`, `three_round_measurements`, `weight`) VALUES (null,'167 cm','83-65-93 cm','50 kg');
-INSERT INTO `product_model`(`id`, `height`, `three_round_measurements`, `weight`) VALUES (null,'182 cm', null,'67 kg')
+INSERT INTO `product_model`(`id`, `name`, `height`, `three_round_measurements`, `weight`) VALUES (null, "Nguyen Ngoc Bieu Ly", '167 cm','83-65-93 cm','50 kg');
+INSERT INTO `product_model`(`id`,  `name`, `height`, `three_round_measurements`, `weight`) VALUES (null, "Duong Trung Nguyen", '182 cm', null,'67 kg')

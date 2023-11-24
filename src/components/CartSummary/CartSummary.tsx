@@ -48,11 +48,11 @@ const CartSummary = ({ cartData, reload } : { cartData : CartProduct[], reload :
       <div className={cx("over-view-items")}>
         <div className={cx("over-view-item")}>
           <p>Tổng tiền hàng</p>
-          <p>{ cartData.reduce((sumPrice, value) => sumPrice + value.salePrice, 0).toLocaleString("en") }đ</p>
+          <p>{ cartData.reduce((sumPrice, value) => sumPrice + value.sumPrice, 0).toLocaleString("en") }đ</p>
         </div>
         <div className={cx("over-view-item")}>
           <p>Tạm tính</p>
-          <p>{ cartData.reduce((sumPrice, value) => sumPrice + value.salePrice, 0).toLocaleString("en") }đ</p>
+          <p>{ cartData.reduce((sumPrice, value) => sumPrice + value.sumPrice, 0).toLocaleString("en") }đ</p>
         </div>
         <div className={cx("over-view-item")}>
           <p>Phí vận chuyển</p>
@@ -60,7 +60,7 @@ const CartSummary = ({ cartData, reload } : { cartData : CartProduct[], reload :
         </div>
         <div className={cx("over-view-item")}>
           <p>Tổng tiền hàng</p>
-          <p><strong>{ cartData.reduce((sumPrice, value) => sumPrice + value.salePrice, 0).toLocaleString("en") }đ</strong></p>
+          <p><strong>{ cartData.reduce((sumPrice, value) => sumPrice + value.sumPrice, 0).toLocaleString("en") }đ</strong></p>
         </div>
       </div>
       <div className={cx("inner-notes")}>

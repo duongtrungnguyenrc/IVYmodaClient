@@ -3,6 +3,24 @@
 .main-products-list {
     width: 100%;
     display: grid;
-    grid-gap: 24px;
+    grid-gap: 1.5rem;
     grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+@media only screen and (max-width: 1024px) { 
+    .main-products-list {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+@media only screen and (max-width: 760px) { 
+    .main-products-list {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media only screen and (max-width: 480px) { 
+    .main-products-list {
+        grid-template-columns: 1fr;
+    }
 }

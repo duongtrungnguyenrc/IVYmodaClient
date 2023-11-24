@@ -147,7 +147,7 @@ function Order () {
             </div>
             <div className="dashboard-body">
                 <div className='dashboard-content pe-2'>
-                    <DashboardHeader updateCallback = { setUpdateDataStatus }/>
+                    <DashboardHeader/>
                     <div className="row px-3">
                         <div className="col-9">
                             <div className='dashboard-content-container'>
@@ -182,8 +182,8 @@ function Order () {
                                                   console.log(order);
                                                   
                                                     return(
-                                                        <tr key={ order.id } className="data-row">
-                                                          <td><input type="radio" name="selected" value={ index } onChange={() => setSelectedOrder(index)}/></td>
+                                                        <tr key={ order.id } className="data-row" onClick={() => setSelectedOrder(index)}>
+                                                          <td><input type="radio" name="selected" value={ index } checked={selectedOrder === index}/></td>
                                                           <td><span>#{order.id}</span></td>
                                                           <td><span>{order.user.name}</span></td>
                                                           <td><span>{(order.time + "").replace("T", " - ").split("+")[0]}</span></td>
@@ -247,7 +247,7 @@ function Order () {
                           <div className='mt-3 d-flex justify-content-between align-items-center'>
                             <h6>Tổng tiền: { data.orders[selectedOrder]?.products.reduce((sum, item) => sum + item.salePrice, 0).toLocaleString("en") }đ</h6>
                               {
-                                selectedOrder > 0 && data.orders[selectedOrder].status !== "COMPLETED" && data.orders[selectedOrder].status !== "REJECTED" &&
+                                selectedOrder != -1 && data.orders[selectedOrder].status !== "COMPLETED" && data.orders[selectedOrder].status !== "REJECTED" &&
                                 <div className='d-flex'>
                                     <button className='btn btn-secondary me-2' data-bs-toggle="modal" data-bs-target="#rejectOrder">
                                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill='#fff'>

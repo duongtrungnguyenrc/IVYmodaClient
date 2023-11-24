@@ -1,14 +1,13 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { NavLinks, Product, Content, ProductsFilter, Skeleton } from "../../../components";
 import Pagination from 'react-bootstrap/Pagination';
 import axios from "../../../services/CustomAxios";
-import { ProductModel } from "../../../models/Product";
+import ProductModel from "../../../models/Product";
 import { useSearchParams } from "react-router-dom";
 import CartProduct from "../../../models/CartProduct";
 import cartService from "../../../services/CartService";
 import ProductFilter from "../../../models/ProductFilter";
 import DefaultLayout from "../../../layouts/DefaultLayout";
-import { toast } from "react-toastify";
 
 import styles from "./styles.module.scss";
 import classNames from "classnames/bind";
@@ -30,9 +29,18 @@ const Categories = () => {
     const group = params[0].get("group")?.toUpperCase();
     const category = params[0].get("name");
 
+    const loadCardData = useCallback(() => {
+        const cart: CartProduct[] = cartService.load();        
+        if (cart) {
+            setCartData(cart);
+        }
+    }, []);
+
     useEffect(() => {
         const fetchData = async () => {
-            let apiRoute = `product/all?page=${page}&limit=20&category=${category}&group=${group}`;
+            let apiRoute = `product/all?page=${page}&limit=20`;
+            if(group && category)
+                apiRoute +=`&category=${category}&group=${group}`;
             if(filter?.color) {
                 apiRoute += `&color=${filter.color}`;
             }
@@ -55,21 +63,14 @@ const Categories = () => {
     }, [page, filter]);
 
     useEffect(() => {
-        const cart: CartProduct[] = cartService.load();        
-        if (cart) {
-          setCartData(cart);
-        }
-    }, [])
+    loadCardData();
+    }, []);
 
     const handleSetPage = (page : number) => {
         setPage(page);
-    }
+    };
+
     
-    const handleAddCartItem = (product: CartProduct) => {
-        cartService.add(product);
-        toast.success(`Đã thêm ${product.productName} vào giỏ hàng!`);
-        setCartData(cartService.load());
-    }
 
     return (
         <DefaultLayout cartData={cartData}>
@@ -88,12 +89,12 @@ const Categories = () => {
                         </div>
                         {
                             data.products ?
-                            (data.products.length != 0 ?  
+                            ( data.products.length != 0 ?  
                             <>
                                 <div className={cx("main-products-list")}>
                                     {
                                         data.products.map((value, index) => {
-                                            return <Product key={index} product={value} addItemCallback={handleAddCartItem}/>
+                                            return <Product key={index} product={value} reloadCallback={loadCardData}/>
                                         })
                                     }
                                 </div>
@@ -109,7 +110,7 @@ const Categories = () => {
                                     <Pagination.Next onClick={() => page < data.totalPages ? handleSetPage(page + 1) : undefined}/>
                                     <Pagination.Last onClick={() => handleSetPage(data.totalPages)}/>
                                 </Pagination>
-                            </> : "Không tìm thấy sản phẩm phù hợp !") : 
+                            </> : "Không tìm thấy sản phẩm phù hợp !" ) : 
                             <div className={cx("main-products-list")}>
                                 {
                                     Array(20).fill(null).map(() => {

@@ -19,9 +19,7 @@ const Cart = () => {
     }, []);
 
     const loadCardData = () => {
-        const cart: CartProduct[] = cartService.load();        
-        console.log("load");
-        
+        const cart: CartProduct[] = cartService.load();                
         if (cart) {
           setCartData(cart);
         }
@@ -33,7 +31,25 @@ const Cart = () => {
         setCartData([...updatedCart]);
         loadCardData();
         toast.success(`Đã xóa ${item.productName} khỏi giỏ hàng`);
-      }
+    }
+
+    const updateItem = (item : CartProduct) => {
+        cartService.update(item);
+        loadCardData();
+    }
+
+    const updateQuantity = (item : CartProduct, action: string) => {
+        const currPrice = item.sumPrice / item.quantity;
+        if(action === "PLUS") {
+            item.quantity < 10 ? item.quantity++ : undefined;
+        }
+        else {
+            item.quantity > 1 ? item.quantity-- : undefined;
+        }        
+        item.sumPrice = item.quantity * currPrice;
+        
+        updateItem(item);
+    }
 
     return ( 
         <DefaultLayout cartData={cartData}>
@@ -53,7 +69,7 @@ const Cart = () => {
                                 <tbody>
                                     {
                                         cartData.map((item) => {
-                                            return <tr>
+                                            return <tr key={item.id}>
                                                         <td>
                                                             <div className={cx("cart-item")}>
                                                                 <div className={cx("cart-item-img")}>
@@ -81,13 +97,17 @@ const Cart = () => {
                                                         </td>
                                                         <td>
                                                             <div className={cx("quantity-group")}>
-                                                                <button className={cx("minus")}><MinusIcon/></button>
-                                                                <input type="text" placeholder="1" disabled/>
-                                                                <button className={cx("plus")}><PlusIcon/></button>
+                                                                <button className={cx("minus")} onClick={ () => updateQuantity(item, "MINUS") }>
+                                                                    <MinusIcon/>
+                                                                </button>
+                                                                <input type="text" value={item.quantity} readOnly/>
+                                                                <button className={cx("plus")} onClick={ () => updateQuantity(item,"PLUS" ) }>
+                                                                    <PlusIcon/>
+                                                                </button>
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <p className={cx("price")}>{ item.salePrice.toLocaleString("en") }đ</p>
+                                                            <p className={cx("price")}>{ item.sumPrice.toLocaleString("en") }đ</p>
                                                         </td>
                                                         <td>
                                                             <button className={cx("remove-button")} onClick={() => handleRemoveItem(item)}>

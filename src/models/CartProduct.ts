@@ -3,6 +3,7 @@ interface CartProduct {
     imgSrc: string;
     productName: string;
     salePrice: number;
+    sumPrice: number;
     quantity: number;
     size: {
         id: number;

@@ -25,6 +25,7 @@ function SpecialCategory({ title, tag } : { title : string, tag : string}) {
     }, [])
 
     return ( 
+        specialProducts && specialProducts.reduce((count, item) => item.products.length != 0 ? ++count : count, 0) !== 0 &&
         <section className={cx("special-products-category")}>
             <div className={cx("title-section")}>
                 {title}
